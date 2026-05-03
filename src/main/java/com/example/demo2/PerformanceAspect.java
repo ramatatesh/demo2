@@ -11,21 +11,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class PerformanceAspect {
 
-    private static final Logger logger =
-            LoggerFactory.getLogger(PerformanceAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(PerformanceAspect.class);
 
-    @Around("execution(* com.example.demo2..*(..))")
+    // ✅ الإصلاح: أضفنا service.* حتى يشمل الـ subpackage
+    @Around("execution(* com.example.demo2.service.*.*(..))")
     public Object measureTime(ProceedingJoinPoint joinPoint) throws Throwable {
+
+        String methodName = joinPoint.getSignature().toShortString();
+        String threadName = Thread.currentThread().getName();
 
         long start = System.currentTimeMillis();
 
-        Object result = joinPoint.proceed();
+        Object result = joinPoint.proceed(); // تنفيذ الـ method الأصلية
 
-        long end = System.currentTimeMillis();
+        long duration = System.currentTimeMillis() - start;
 
-        logger.info("AOP -> {} executed in {} ms",
-                joinPoint.getSignature(),
-                (end - start));
+        // تصنيف الأداء
+        String performance = duration < 100  ? "🟢 FAST"
+                : duration < 1000 ? "🟡 MEDIUM"
+                : "🔴 SLOW";
+
+        logger.info("╔══ AOP MONITOR ══════════════════════════════");
+        logger.info("║ Method  : {}", methodName);
+        logger.info("║ Duration: {} ms  {}", duration, performance);
+        logger.info("║ Thread  : {}", threadName);
+        logger.info("╚═════════════════════════════════════════════");
 
         return result;
     }
