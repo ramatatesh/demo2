@@ -21,4 +21,12 @@
 | **زمن التحسين**              | —                                        | ~98.8% أسرع 🚀                               |
 | **نموذج التنفيذ**            | Blocking / Synchronous                    | Non-Blocking / Asynchronous                 |
 
- 
+| **المعيار**                    | قبل الحل — Real-Time ❌               | قبل الحل — Batch Sequential ❌        | بعد الحل (Parallel Batch) ✅          |
+|:-------------------------------|:--------------------------------------|:--------------------------------------|:--------------------------------------|
+| **المشكلة المكتشفة**           | Sequential Overload: كل request       | No Parallelism: تجميع ثم تسلسل        | لا توجد — الحل الأمثل                 |
+| **نوع المعالجة**               | Sequential — Request by Request       | Sequential — Batch at once            | Parallel Chunks + Thread Pool         |
+| **زمن الاستجابة (AOP)**        | ~3,000ms (10 × 300ms واحد وراء الثاني)| ~5,000ms (collect delay + process)    | ~700ms (3 chunks × 300ms بالتوازي)   |
+| **Threads المستخدمة**          | 1 Thread فقط (HTTP thread)            | 1 Thread فقط (HTTP thread)            | 3 Worker Threads (Thread Pool)        |
+| **CPU Utilization**            | ~10% (thread واحد فقط)               | ~10% (thread واحد فقط)               | ~80-100% (جميع الـ CPU cores)        |
+| **أمان الذاكرة**               | ❌ خطر OutOfMemory مع البيانات الكبيرة| ❌ خطر OutOfMemory                    | ✅ آمن — Chunks تحمي الذاكرة         |
+| **Idempotency**                | ❌ لا يوجد — قد يعالج نفس السجل مرتين| ❌ لا يوجد                            | ✅ processed=true يمنع التكرار        |
