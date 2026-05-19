@@ -439,3 +439,901 @@
 2026-05-11T08:49:41.097+03:00  INFO 21608 --- [demo2] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-05-11T08:49:41.098+03:00  INFO 21608 --- [demo2] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2026-05-11T08:49:41.105+03:00  INFO 21608 --- [demo2] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-19T09:55:10.561+03:00  INFO 14132 --- [demo2] [main] com.example.demo2.Demo2Application       : Starting Demo2Application using Java 25.0.1 with PID 14132 (C:\Users\Lenovo\demo2\target\classes started by Lenovo in C:\Users\Lenovo\demo2)
+2026-05-19T09:55:10.564+03:00 DEBUG 14132 --- [demo2] [main] com.example.demo2.Demo2Application       : Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-05-19T09:55:10.566+03:00  INFO 14132 --- [demo2] [main] com.example.demo2.Demo2Application       : No active profile set, falling back to 1 default profile: "default"
+2026-05-19T09:55:12.022+03:00  INFO 14132 --- [demo2] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-19T09:55:12.139+03:00  INFO 14132 --- [demo2] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 99 ms. Found 2 JPA repository interfaces.
+2026-05-19T09:55:13.603+03:00  INFO 14132 --- [demo2] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-19T09:55:13.631+03:00  INFO 14132 --- [demo2] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-19T09:55:13.632+03:00  INFO 14132 --- [demo2] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-05-19T09:55:13.729+03:00  INFO 14132 --- [demo2] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-19T09:55:13.730+03:00  INFO 14132 --- [demo2] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3015 ms
+2026-05-19T09:55:14.138+03:00  INFO 14132 --- [demo2] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-19T09:55:14.268+03:00  INFO 14132 --- [demo2] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-05-19T09:55:14.345+03:00  INFO 14132 --- [demo2] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-19T09:55:14.806+03:00  INFO 14132 --- [demo2] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-19T09:55:14.855+03:00  INFO 14132 --- [demo2] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-19T09:55:16.002+03:00 ERROR 14132 --- [demo2] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+
+com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:815) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:438) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:189) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:61) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) ~[spring-boot-3.2.5.jar:3.2.5]
+	at com.example.demo2.Demo2Application.main(Demo2Application.java:13) ~[classes/:na]
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483) ~[na:na]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:104) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:149) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:165) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:88) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:120) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:935) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:805) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	... 49 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:639) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:543) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:594) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:284) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:659) ~[na:na]
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:153) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:62) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	... 52 common frames omitted
+
+2026-05-19T09:55:16.021+03:00  WARN 14132 --- [demo2] [main] o.h.e.j.e.i.JdbcEnvironmentInitiator     : HHH000342: Could not obtain connection to query metadata
+
+java.lang.NullPointerException: Cannot invoke "org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(java.sql.SQLException, String)" because the return value of "org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.sqlExceptionHelper()" is null
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:116) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) ~[spring-boot-3.2.5.jar:3.2.5]
+	at com.example.demo2.Demo2Application.main(Demo2Application.java:13) ~[classes/:na]
+
+2026-05-19T09:55:16.057+03:00  WARN 14132 --- [demo2] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-19T09:55:17.402+03:00  INFO 14132 --- [demo2] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-19T09:55:17.428+03:00  INFO 14132 --- [demo2] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-19T09:55:18.435+03:00 ERROR 14132 --- [demo2] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+
+com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:815) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:438) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:189) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:39) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcConnection(ImprovedExtractionContextImpl.java:63) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcDatabaseMetaData(ImprovedExtractionContextImpl.java:70) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.extract.internal.InformationExtractorJdbcDatabaseMetaDataImpl.processTableResultSet(InformationExtractorJdbcDatabaseMetaDataImpl.java:64) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.extract.internal.AbstractInformationExtractorImpl.getTables(AbstractInformationExtractorImpl.java:570) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.getTablesInformation(DatabaseInformationImpl.java:122) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:72) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:232) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:286) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1430) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) ~[spring-boot-3.2.5.jar:3.2.5]
+	at com.example.demo2.Demo2Application.main(Demo2Application.java:13) ~[classes/:na]
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483) ~[na:na]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:104) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:149) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:165) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:88) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:120) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:935) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:805) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	... 54 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:639) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:543) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:594) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:284) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:659) ~[na:na]
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:153) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:62) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	... 57 common frames omitted
+
+2026-05-19T09:55:18.442+03:00  WARN 14132 --- [demo2] [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 08S01
+2026-05-19T09:55:18.442+03:00 ERROR 14132 --- [demo2] [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2026-05-19T09:55:18.468+03:00 ERROR 14132 --- [demo2] [main] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.] [n/a]
+2026-05-19T09:55:18.470+03:00  WARN 14132 --- [demo2] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.] [n/a]
+2026-05-19T09:55:18.474+03:00  INFO 14132 --- [demo2] [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-05-19T09:55:18.496+03:00  INFO 14132 --- [demo2] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-19T09:55:18.527+03:00 ERROR 14132 --- [demo2] [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.] [n/a]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) ~[spring-boot-3.2.5.jar:3.2.5]
+	at com.example.demo2.Demo2Application.main(Demo2Application.java:13) ~[classes/:na]
+Caused by: jakarta.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.] [n/a]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-6.1.6.jar:6.1.6]
+	... 16 common frames omitted
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.] [n/a]
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:100) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:74) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:39) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcConnection(ImprovedExtractionContextImpl.java:63) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcDatabaseMetaData(ImprovedExtractionContextImpl.java:70) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.extract.internal.InformationExtractorJdbcDatabaseMetaDataImpl.processTableResultSet(InformationExtractorJdbcDatabaseMetaDataImpl.java:64) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.extract.internal.AbstractInformationExtractorImpl.getTables(AbstractInformationExtractorImpl.java:570) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.getTablesInformation(DatabaseInformationImpl.java:122) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:72) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:232) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:286) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1430) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.6.jar:6.1.6]
+	... 20 common frames omitted
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:815) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:438) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:189) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	... 41 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483) ~[na:na]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:104) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:149) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:165) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:88) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:120) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:935) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:805) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	... 54 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:639) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:543) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:594) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:284) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:659) ~[na:na]
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:153) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:62) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	... 57 common frames omitted
+
+2026-05-19T09:56:47.260+03:00  INFO 14616 --- [demo2] [main] com.example.demo2.Demo2Application       : Starting Demo2Application using Java 25.0.1 with PID 14616 (C:\Users\Lenovo\demo2\target\classes started by Lenovo in C:\Users\Lenovo\demo2)
+2026-05-19T09:56:47.263+03:00 DEBUG 14616 --- [demo2] [main] com.example.demo2.Demo2Application       : Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-05-19T09:56:47.265+03:00  INFO 14616 --- [demo2] [main] com.example.demo2.Demo2Application       : No active profile set, falling back to 1 default profile: "default"
+2026-05-19T09:56:48.295+03:00  INFO 14616 --- [demo2] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-19T09:56:48.421+03:00  INFO 14616 --- [demo2] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 111 ms. Found 2 JPA repository interfaces.
+2026-05-19T09:56:49.792+03:00  INFO 14616 --- [demo2] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-19T09:56:49.817+03:00  INFO 14616 --- [demo2] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-19T09:56:49.818+03:00  INFO 14616 --- [demo2] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-05-19T09:56:49.906+03:00  INFO 14616 --- [demo2] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-19T09:56:49.907+03:00  INFO 14616 --- [demo2] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2529 ms
+2026-05-19T09:56:50.238+03:00  INFO 14616 --- [demo2] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-19T09:56:50.317+03:00  INFO 14616 --- [demo2] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-05-19T09:56:50.358+03:00  INFO 14616 --- [demo2] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-19T09:56:50.774+03:00  INFO 14616 --- [demo2] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-19T09:56:50.825+03:00  INFO 14616 --- [demo2] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-19T09:56:51.150+03:00  INFO 14616 --- [demo2] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6d4a05f7
+2026-05-19T09:56:51.154+03:00  INFO 14616 --- [demo2] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-19T09:56:51.223+03:00  WARN 14616 --- [demo2] [main] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2026-05-19T09:56:51.230+03:00  WARN 14616 --- [demo2] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-19T09:56:52.447+03:00  INFO 14616 --- [demo2] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-19T09:56:52.592+03:00  INFO 14616 --- [demo2] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-19T09:56:53.342+03:00  INFO 14616 --- [demo2] [main] c.e.demo2.service.AsyncQueueService      : ✅ Async Queue Worker started
+2026-05-19T09:56:53.394+03:00  INFO 14616 --- [demo2] [main] com.example.demo2.PerformanceAspect      : ┌─[TRACE:15AD992B]─────────────────────────────
+2026-05-19T09:56:53.395+03:00  INFO 14616 --- [demo2] [main] com.example.demo2.PerformanceAspect      : │ ▶ START  : ThreadPoolConfig.orderThreadPool()
+2026-05-19T09:56:53.397+03:00  INFO 14616 --- [demo2] [main] com.example.demo2.PerformanceAspect      : │   Thread : main
+2026-05-19T09:56:53.398+03:00  INFO 14616 --- [demo2] [main] com.example.demo2.PerformanceAspect      : │ ■ END    : ThreadPoolConfig.orderThreadPool()
+2026-05-19T09:56:53.398+03:00  INFO 14616 --- [demo2] [main] com.example.demo2.PerformanceAspect      : │   Time   : 1 ms  🟢 FAST
+2026-05-19T09:56:53.399+03:00  INFO 14616 --- [demo2] [main] com.example.demo2.PerformanceAspect      : └─[TRACE:15AD992B]─────────────────────────────
+2026-05-19T09:56:53.399+03:00  INFO 14616 --- [demo2] [main] com.example.demo2.PerformanceAspect      : AOP -> ThreadPoolExecutor com.example.demo2.config.ThreadPoolConfig.orderThreadPool() executed in 1 ms
+2026-05-19T09:56:53.463+03:00  INFO 14616 --- [demo2] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-19T09:56:53.992+03:00  INFO 14616 --- [demo2] [main] c.e.d.loadbalancer.LoadBalancerService   : 🚀 Load Balancer initialized with 3 virtual servers
+2026-05-19T09:56:54.141+03:00  WARN 14616 --- [demo2] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-19T09:56:54.922+03:00  INFO 14616 --- [demo2] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-05-19T09:56:54.941+03:00  INFO 14616 --- [demo2] [main] com.example.demo2.Demo2Application       : Started Demo2Application in 8.377 seconds (process running for 9.039)
+2026-05-19T10:01:49.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-19T10:01:49.371+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-19T10:01:49.383+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2026-05-19T10:01:49.985+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : ┌─[TRACE:AB8CBBDB]─────────────────────────────
+2026-05-19T10:01:49.987+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:49.987+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-6
+2026-05-19T10:01:49.987+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:49.989+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : ┌─[TRACE:3B5C2F9B]─────────────────────────────
+2026-05-19T10:01:49.989+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : ┌─[TRACE:CB962013]─────────────────────────────
+2026-05-19T10:01:49.989+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:49.989+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : ┌─[TRACE:7DAD98F3]─────────────────────────────
+2026-05-19T10:01:49.991+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : ┌─[TRACE:52F83C3E]─────────────────────────────
+2026-05-19T10:01:50.003+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.003+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-8
+2026-05-19T10:01:50.003+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-10
+2026-05-19T10:01:50.003+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:49.989+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.005+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-20
+2026-05-19T10:01:50.005+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.005+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : ┌─[TRACE:F1E5303F]─────────────────────────────
+2026-05-19T10:01:50.005+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.005+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-20
+2026-05-19T10:01:50.007+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-1 (Index: 0)
+2026-05-19T10:01:49.991+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : ┌─[TRACE:676B6099]─────────────────────────────
+2026-05-19T10:01:49.991+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : ┌─[TRACE:D554D299]─────────────────────────────
+2026-05-19T10:01:49.991+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : ┌─[TRACE:E5AD65A2]─────────────────────────────
+2026-05-19T10:01:49.993+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : ┌─[TRACE:4BC17B18]─────────────────────────────
+2026-05-19T10:01:50.013+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.013+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-14
+2026-05-19T10:01:50.013+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:49.993+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : ┌─[TRACE:066EC542]─────────────────────────────
+2026-05-19T10:01:50.013+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.013+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-18
+2026-05-19T10:01:50.013+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.015+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : ┌─[TRACE:7493B6E4]─────────────────────────────
+2026-05-19T10:01:50.015+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.015+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-18
+2026-05-19T10:01:50.015+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-2 (Index: 1)
+2026-05-19T10:01:49.993+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : ┌─[TRACE:A503D26C]─────────────────────────────
+2026-05-19T10:01:50.015+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.015+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-19
+2026-05-19T10:01:50.015+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.015+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : ┌─[TRACE:7D80F4F8]─────────────────────────────
+2026-05-19T10:01:50.015+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.015+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-19
+2026-05-19T10:01:50.015+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-3 (Index: 2)
+2026-05-19T10:01:49.993+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : ┌─[TRACE:1425DC1D]─────────────────────────────
+2026-05-19T10:01:50.015+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:49.993+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : ┌─[TRACE:DBCBFCC5]─────────────────────────────
+2026-05-19T10:01:50.017+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.017+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-28
+2026-05-19T10:01:50.017+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-9
+2026-05-19T10:01:50.017+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : ┌─[TRACE:A716802C]─────────────────────────────
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-9
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-1 (Index: 0)
+2026-05-19T10:01:49.995+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : ┌─[TRACE:22DE4CAF]─────────────────────────────
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : ┌─[TRACE:B8A24AA0]─────────────────────────────
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:49.995+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : ┌─[TRACE:638335FC]─────────────────────────────
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:49.995+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : ┌─[TRACE:0AD76860]─────────────────────────────
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-5
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-1
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:49.995+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : ┌─[TRACE:EBA3B134]─────────────────────────────
+2026-05-19T10:01:50.021+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.021+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-7
+2026-05-19T10:01:50.021+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.021+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : ┌─[TRACE:A7592CC3]─────────────────────────────
+2026-05-19T10:01:50.021+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.021+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-7
+2026-05-19T10:01:50.021+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-2 (Index: 1)
+2026-05-19T10:01:50.021+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : ┌─[TRACE:3AA4FDD1]─────────────────────────────
+2026-05-19T10:01:50.021+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:49.995+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : ┌─[TRACE:64DAA736]─────────────────────────────
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-26
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : ┌─[TRACE:8E2EFB04]─────────────────────────────
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-26
+2026-05-19T10:01:49.997+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : ┌─[TRACE:4E8F4942]─────────────────────────────
+2026-05-19T10:01:49.997+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : ┌─[TRACE:7A8F82B3]─────────────────────────────
+2026-05-19T10:01:49.997+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : ┌─[TRACE:332A6C5F]─────────────────────────────
+2026-05-19T10:01:49.997+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : ┌─[TRACE:F84F7444]─────────────────────────────
+2026-05-19T10:01:49.997+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : ┌─[TRACE:94CD5780]─────────────────────────────
+2026-05-19T10:01:49.997+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : ┌─[TRACE:D210A8FA]─────────────────────────────
+2026-05-19T10:01:49.997+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : ┌─[TRACE:64A4409F]─────────────────────────────
+2026-05-19T10:01:49.997+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : ┌─[TRACE:3D626405]─────────────────────────────
+2026-05-19T10:01:49.985+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : ┌─[TRACE:D95E58B3]─────────────────────────────
+2026-05-19T10:01:49.999+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : ┌─[TRACE:24F54ACE]─────────────────────────────
+2026-05-19T10:01:49.985+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : ┌─[TRACE:39F956D3]─────────────────────────────
+2026-05-19T10:01:49.987+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : ┌─[TRACE:95865516]─────────────────────────────
+2026-05-19T10:01:50.003+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.003+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.011+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.011+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.021+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : ┌─[TRACE:A5A5B965]─────────────────────────────
+2026-05-19T10:01:50.021+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-5
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-3 (Index: 2)
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.026+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-3
+2026-05-19T10:01:50.026+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.029+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : ┌─[TRACE:073EABAA]─────────────────────────────
+2026-05-19T10:01:50.029+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.029+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-3
+2026-05-19T10:01:50.029+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-2 (Index: 1)
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.029+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-13
+2026-05-19T10:01:50.029+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.029+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : ┌─[TRACE:D87F6638]─────────────────────────────
+2026-05-19T10:01:50.029+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.029+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-13
+2026-05-19T10:01:50.031+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-3 (Index: 2)
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.031+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-24
+2026-05-19T10:01:50.031+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.031+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : ┌─[TRACE:9C2BEDB9]─────────────────────────────
+2026-05-19T10:01:50.031+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.031+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-24
+2026-05-19T10:01:50.031+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-1 (Index: 0)
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.031+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-21
+2026-05-19T10:01:50.033+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.033+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : ┌─[TRACE:C35EA33A]─────────────────────────────
+2026-05-19T10:01:50.033+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.033+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-21
+2026-05-19T10:01:50.033+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-2 (Index: 1)
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.033+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-22
+2026-05-19T10:01:50.033+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.033+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : ┌─[TRACE:D0E785C9]─────────────────────────────
+2026-05-19T10:01:50.035+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.035+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-22
+2026-05-19T10:01:50.035+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-3 (Index: 2)
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.035+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-12
+2026-05-19T10:01:50.035+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.035+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : ┌─[TRACE:1876BFB3]─────────────────────────────
+2026-05-19T10:01:50.035+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.035+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-12
+2026-05-19T10:01:50.035+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-1 (Index: 0)
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.035+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-27
+2026-05-19T10:01:50.035+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.037+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : ┌─[TRACE:D474DE48]─────────────────────────────
+2026-05-19T10:01:50.037+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.037+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-27
+2026-05-19T10:01:50.037+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-2 (Index: 1)
+2026-05-19T10:01:50.023+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.037+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-11
+2026-05-19T10:01:50.037+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.037+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : ┌─[TRACE:22E4C696]─────────────────────────────
+2026-05-19T10:01:50.037+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.037+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-11
+2026-05-19T10:01:50.039+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-3 (Index: 2)
+2026-05-19T10:01:50.025+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.039+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-25
+2026-05-19T10:01:50.039+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.039+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : ┌─[TRACE:44D6B2E6]─────────────────────────────
+2026-05-19T10:01:50.039+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.039+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-25
+2026-05-19T10:01:50.039+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-1 (Index: 0)
+2026-05-19T10:01:50.025+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.039+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-29
+2026-05-19T10:01:50.039+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.039+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : ┌─[TRACE:7C006F1F]─────────────────────────────
+2026-05-19T10:01:50.041+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.041+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-29
+2026-05-19T10:01:50.041+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-2 (Index: 1)
+2026-05-19T10:01:50.025+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.041+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-17
+2026-05-19T10:01:50.041+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.041+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : ┌─[TRACE:88889DC4]─────────────────────────────
+2026-05-19T10:01:50.041+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.042+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-17
+2026-05-19T10:01:50.025+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.042+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-6
+2026-05-19T10:01:50.042+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-1 (Index: 0)
+2026-05-19T10:01:50.042+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-3 (Index: 2)
+2026-05-19T10:01:50.025+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-15
+2026-05-19T10:01:50.042+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.042+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : ┌─[TRACE:DA193E98]─────────────────────────────
+2026-05-19T10:01:50.042+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.042+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-15
+2026-05-19T10:01:50.042+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-2 (Index: 1)
+2026-05-19T10:01:50.025+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : ┌─[TRACE:ABA8BA25]─────────────────────────────
+2026-05-19T10:01:50.042+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.042+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-8
+2026-05-19T10:01:50.044+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-3 (Index: 2)
+2026-05-19T10:01:50.025+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-2
+2026-05-19T10:01:50.044+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.044+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : ┌─[TRACE:6A4CA420]─────────────────────────────
+2026-05-19T10:01:50.019+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-28
+2026-05-19T10:01:50.044+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.025+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-16
+2026-05-19T10:01:50.026+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.053+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-1
+2026-05-19T10:01:50.026+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-1 (Index: 0)
+2026-05-19T10:01:50.025+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-4
+2026-05-19T10:01:50.053+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-2 (Index: 1)
+2026-05-19T10:01:50.053+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.044+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-1 (Index: 0)
+2026-05-19T10:01:50.046+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : ┌─[TRACE:B7FD140B]─────────────────────────────
+2026-05-19T10:01:50.053+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.053+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-14
+2026-05-19T10:01:50.053+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : ┌─[TRACE:0E82F33D]─────────────────────────────
+2026-05-19T10:01:50.053+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-3 (Index: 2)
+2026-05-19T10:01:50.053+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.053+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-4
+2026-05-19T10:01:50.005+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : ┌─[TRACE:F83B99B3]─────────────────────────────
+2026-05-19T10:01:50.053+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-1 (Index: 0)
+2026-05-19T10:01:50.053+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.055+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-10
+2026-05-19T10:01:50.055+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-2 (Index: 1)
+2026-05-19T10:01:50.050+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.055+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-23
+2026-05-19T10:01:50.055+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.055+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : ┌─[TRACE:F87F01CC]─────────────────────────────
+2026-05-19T10:01:50.053+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.055+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-2
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-23
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-3 (Index: 2)
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-1 (Index: 0)
+2026-05-19T10:01:50.062+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : ┌─[TRACE:04D9F0D4]─────────────────────────────
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-30
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] c.e.d.l.LoadBalancerController           : 📨 طلب وصل إلى /lb/with بتأخير 200ms
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : ┌─[TRACE:F5617598]─────────────────────────────
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : ┌─[TRACE:91B754C0]─────────────────────────────
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : │ ▶ START  : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-30
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : │   Thread : http-nio-8080-exec-16
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-3 (Index: 2)
+2026-05-19T10:01:50.142+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] وجّه الطلب إلى: Server-2 (Index: 1)
+2026-05-19T10:01:50.209+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-1] عالج الطلب رقم #1 في 200 ms
+2026-05-19T10:01:50.251+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-3] عالج الطلب رقم #2 في 200 ms
+2026-05-19T10:01:50.251+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.251+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : │   Time   : 228 ms  🟢 FAST
+2026-05-19T10:01:50.251+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : └─[TRACE:8E2EFB04]─────────────────────────────
+2026-05-19T10:01:50.251+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 228 ms
+2026-05-19T10:01:50.253+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-2] عالج الطلب رقم #4 في 200 ms
+2026-05-19T10:01:50.255+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.255+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : │   Time   : 222 ms  🟢 FAST
+2026-05-19T10:01:50.253+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-2] عالج الطلب رقم #5 في 200 ms
+2026-05-19T10:01:50.255+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.255+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : │   Time   : 218 ms  🟢 FAST
+2026-05-19T10:01:50.255+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : └─[TRACE:D474DE48]─────────────────────────────
+2026-05-19T10:01:50.255+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 218 ms
+2026-05-19T10:01:50.255+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : └─[TRACE:C35EA33A]─────────────────────────────
+2026-05-19T10:01:50.255+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 222 ms
+2026-05-19T10:01:50.217+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.257+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : │   Time   : 212 ms  🟢 FAST
+2026-05-19T10:01:50.257+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : └─[TRACE:F1E5303F]─────────────────────────────
+2026-05-19T10:01:50.257+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 212 ms
+2026-05-19T10:01:50.268+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-1] عالج الطلب رقم #2 في 200 ms
+2026-05-19T10:01:50.268+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.268+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : │   Time   : 249 ms  🟢 FAST
+2026-05-19T10:01:50.268+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-2] عالج الطلب رقم #1 في 200 ms
+2026-05-19T10:01:50.270+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.270+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : │   Time   : 255 ms  🟢 FAST
+2026-05-19T10:01:50.270+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : └─[TRACE:7493B6E4]─────────────────────────────
+2026-05-19T10:01:50.270+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 255 ms
+2026-05-19T10:01:50.270+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : └─[TRACE:A716802C]─────────────────────────────
+2026-05-19T10:01:50.270+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 249 ms
+2026-05-19T10:01:50.270+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-3] عالج الطلب رقم #1 في 200 ms
+2026-05-19T10:01:50.272+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.272+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : │   Time   : 257 ms  🟢 FAST
+2026-05-19T10:01:50.272+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : └─[TRACE:7D80F4F8]─────────────────────────────
+2026-05-19T10:01:50.272+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 257 ms
+2026-05-19T10:01:50.272+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-1] عالج الطلب رقم #3 في 200 ms
+2026-05-19T10:01:50.272+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.272+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : │   Time   : 241 ms  🟢 FAST
+2026-05-19T10:01:50.272+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : └─[TRACE:9C2BEDB9]─────────────────────────────
+2026-05-19T10:01:50.272+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 241 ms
+2026-05-19T10:01:50.272+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-3] عالج الطلب رقم #3 في 200 ms
+2026-05-19T10:01:50.274+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.274+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : │   Time   : 243 ms  🟢 FAST
+2026-05-19T10:01:50.274+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : └─[TRACE:D87F6638]─────────────────────────────
+2026-05-19T10:01:50.274+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 243 ms
+2026-05-19T10:01:50.274+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-2] عالج الطلب رقم #3 في 200 ms
+2026-05-19T10:01:50.274+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.274+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : │   Time   : 245 ms  🟢 FAST
+2026-05-19T10:01:50.276+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : └─[TRACE:073EABAA]─────────────────────────────
+2026-05-19T10:01:50.276+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 245 ms
+2026-05-19T10:01:50.276+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-3] عالج الطلب رقم #7 في 200 ms
+2026-05-19T10:01:50.276+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.276+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : │   Time   : 232 ms  🟢 FAST
+2026-05-19T10:01:50.281+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : └─[TRACE:ABA8BA25]─────────────────────────────
+2026-05-19T10:01:50.266+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-2] عالج الطلب رقم #2 في 200 ms
+2026-05-19T10:01:50.281+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 232 ms
+2026-05-19T10:01:50.281+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-1] عالج الطلب رقم #6 في 200 ms
+2026-05-19T10:01:50.300+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.300+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : │   Time   : 258 ms  🟢 FAST
+2026-05-19T10:01:50.300+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : └─[TRACE:95865516]─────────────────────────────
+2026-05-19T10:01:50.300+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 258 ms
+2026-05-19T10:01:50.281+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-3] عالج الطلب رقم #6 في 200 ms
+2026-05-19T10:01:50.300+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.300+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : │   Time   : 258 ms  🟢 FAST
+2026-05-19T10:01:50.300+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : └─[TRACE:88889DC4]─────────────────────────────
+2026-05-19T10:01:50.300+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 258 ms
+2026-05-19T10:01:50.283+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-1] عالج الطلب رقم #5 في 200 ms
+2026-05-19T10:01:50.302+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.302+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : │   Time   : 263 ms  🟢 FAST
+2026-05-19T10:01:50.302+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : └─[TRACE:44D6B2E6]─────────────────────────────
+2026-05-19T10:01:50.302+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 263 ms
+2026-05-19T10:01:50.281+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-2] عالج الطلب رقم #7 في 200 ms
+2026-05-19T10:01:50.302+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.302+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : │   Time   : 260 ms  🟢 FAST
+2026-05-19T10:01:50.302+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : └─[TRACE:DA193E98]─────────────────────────────
+2026-05-19T10:01:50.302+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 260 ms
+2026-05-19T10:01:50.285+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-1] عالج الطلب رقم #4 في 200 ms
+2026-05-19T10:01:50.302+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.302+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : │   Time   : 267 ms  🟢 FAST
+2026-05-19T10:01:50.302+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : └─[TRACE:1876BFB3]─────────────────────────────
+2026-05-19T10:01:50.302+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 267 ms
+2026-05-19T10:01:50.285+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-3] عالج الطلب رقم #4 في 200 ms
+2026-05-19T10:01:50.304+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.304+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : │   Time   : 269 ms  🟢 FAST
+2026-05-19T10:01:50.304+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : └─[TRACE:D0E785C9]─────────────────────────────
+2026-05-19T10:01:50.304+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 269 ms
+2026-05-19T10:01:50.293+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-1] عالج الطلب رقم #8 في 200 ms
+2026-05-19T10:01:50.310+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.310+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : │   Time   : 266 ms  🟢 FAST
+2026-05-19T10:01:50.310+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : └─[TRACE:B8A24AA0]─────────────────────────────
+2026-05-19T10:01:50.310+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 266 ms
+2026-05-19T10:01:50.291+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-1] عالج الطلب رقم #9 في 200 ms
+2026-05-19T10:01:50.312+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.291+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-2] عالج الطلب رقم #9 في 200 ms
+2026-05-19T10:01:50.314+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : │   Time   : 259 ms  🟢 FAST
+2026-05-19T10:01:50.293+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-2] عالج الطلب رقم #8 في 200 ms
+2026-05-19T10:01:50.315+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.299+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-1] عالج الطلب رقم #7 في 200 ms
+2026-05-19T10:01:50.317+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : └─[TRACE:0E82F33D]─────────────────────────────
+2026-05-19T10:01:50.317+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.300+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 259 ms
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : │   Time   : 279 ms  🟢 FAST
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : └─[TRACE:A7592CC3]─────────────────────────────
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 279 ms
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-2] عالج الطلب رقم #6 في 200 ms
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : │   Time   : 282 ms  🟢 FAST
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : └─[TRACE:7C006F1F]─────────────────────────────
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 282 ms
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-3] عالج الطلب رقم #5 في 200 ms
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : │   Time   : 284 ms  🟢 FAST
+2026-05-19T10:01:50.329+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-3] عالج الطلب رقم #8 في 200 ms
+2026-05-19T10:01:50.331+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.331+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : │   Time   : 278 ms  🟢 FAST
+2026-05-19T10:01:50.331+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : └─[TRACE:B7FD140B]─────────────────────────────
+2026-05-19T10:01:50.331+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 278 ms
+2026-05-19T10:01:50.321+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : │   Time   : 264 ms  🟢 FAST
+2026-05-19T10:01:50.333+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : │   Time   : 295 ms  🟢 FAST
+2026-05-19T10:01:50.321+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : │   Time   : 260 ms  🟢 FAST
+2026-05-19T10:01:50.333+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : └─[TRACE:3AA4FDD1]─────────────────────────────
+2026-05-19T10:01:50.333+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : └─[TRACE:A5A5B965]─────────────────────────────
+2026-05-19T10:01:50.333+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 295 ms
+2026-05-19T10:01:50.333+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 264 ms
+2026-05-19T10:01:50.333+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : └─[TRACE:F83B99B3]─────────────────────────────
+2026-05-19T10:01:50.333+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 260 ms
+2026-05-19T10:01:50.323+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : └─[TRACE:22E4C696]─────────────────────────────
+2026-05-19T10:01:50.333+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 284 ms
+2026-05-19T10:01:50.352+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.352+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.352+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : │   Time   : 321 ms  🟢 FAST
+2026-05-19T10:01:50.352+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : │   Time   : 339 ms  🟢 FAST
+2026-05-19T10:01:50.352+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : └─[TRACE:332A6C5F]─────────────────────────────
+2026-05-19T10:01:50.352+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : └─[TRACE:066EC542]─────────────────────────────
+2026-05-19T10:01:50.352+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-18] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 339 ms
+2026-05-19T10:01:50.352+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-24] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 321 ms
+2026-05-19T10:01:50.352+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : │   Time   : 326 ms  🟢 FAST
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : └─[TRACE:4E8F4942]─────────────────────────────
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-3] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 326 ms
+2026-05-19T10:01:50.352+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : │   Time   : 347 ms  🟢 FAST
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : └─[TRACE:3B5C2F9B]─────────────────────────────
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-20] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 347 ms
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : │   Time   : 335 ms  🟢 FAST
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : └─[TRACE:DBCBFCC5]─────────────────────────────
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-9] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 335 ms
+2026-05-19T10:01:50.352+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : │   Time   : 323 ms  🟢 FAST
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : └─[TRACE:7A8F82B3]─────────────────────────────
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-13] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 323 ms
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : │   Time   : 331 ms  🟢 FAST
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : └─[TRACE:64DAA736]─────────────────────────────
+2026-05-19T10:01:50.356+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.356+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : │   Time   : 341 ms  🟢 FAST
+2026-05-19T10:01:50.356+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : └─[TRACE:A503D26C]─────────────────────────────
+2026-05-19T10:01:50.356+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.356+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-19] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 341 ms
+2026-05-19T10:01:50.356+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : │   Time   : 353 ms  🟢 FAST
+2026-05-19T10:01:50.356+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : └─[TRACE:CB962013]─────────────────────────────
+2026-05-19T10:01:50.354+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-26] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 331 ms
+2026-05-19T10:01:50.356+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-8] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 353 ms
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : │   Time   : 370 ms  🟢 FAST
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : └─[TRACE:AB8CBBDB]─────────────────────────────
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-6] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 370 ms
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-1] عالج الطلب رقم #10 في 200 ms
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : │   Time   : 215 ms  🟢 FAST
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : └─[TRACE:F87F01CC]─────────────────────────────
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 215 ms
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : │   Time   : 302 ms  🟢 FAST
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : └─[TRACE:676B6099]─────────────────────────────
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-23] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 302 ms
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : │   Time   : 316 ms  🟢 FAST
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : └─[TRACE:39F956D3]─────────────────────────────
+2026-05-19T10:01:50.357+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-17] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 316 ms
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : │   Time   : 320 ms  🟢 FAST
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : └─[TRACE:D95E58B3]─────────────────────────────
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-25] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 320 ms
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : │   Time   : 317 ms  🟢 FAST
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : └─[TRACE:52F83C3E]─────────────────────────────
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-15] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 317 ms
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : │   Time   : 324 ms  🟢 FAST
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : └─[TRACE:D210A8FA]─────────────────────────────
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.359+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-12] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 324 ms
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : │   Time   : 326 ms  🟢 FAST
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : └─[TRACE:94CD5780]─────────────────────────────
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-22] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 326 ms
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : │   Time   : 344 ms  🟢 FAST
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : └─[TRACE:1425DC1D]─────────────────────────────
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-28] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 344 ms
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : │   Time   : 308 ms  🟢 FAST
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : └─[TRACE:638335FC]─────────────────────────────
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : │   Time   : 340 ms  🟢 FAST
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : └─[TRACE:EBA3B134]─────────────────────────────
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-7] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 340 ms
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : │   Time   : 342 ms  🟢 FAST
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : └─[TRACE:22DE4CAF]─────────────────────────────
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-5] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 342 ms
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : │   Time   : 348 ms  🟢 FAST
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : └─[TRACE:4BC17B18]─────────────────────────────
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-4] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 308 ms
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : │   Time   : 342 ms  🟢 FAST
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : └─[TRACE:0AD76860]─────────────────────────────
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-1] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 342 ms
+2026-05-19T10:01:50.363+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.365+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-2] عالج الطلب رقم #10 في 200 ms
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : │   Time   : 330 ms  🟢 FAST
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : └─[TRACE:F84F7444]─────────────────────────────
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-21] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 330 ms
+2026-05-19T10:01:50.365+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-3] عالج الطلب رقم #10 في 200 ms
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : │   Time   : 226 ms  🟢 FAST
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : └─[TRACE:F5617598]─────────────────────────────
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 226 ms
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.365+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] c.e.d.loadbalancer.LoadBalancerService   : ✅ [Load Balancer] نتيجة: ✅ [Server-3] عالج الطلب رقم #9 في 200 ms
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : │   Time   : 226 ms  🟢 FAST
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerService.handleWithLoadBalancing(..)
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : └─[TRACE:91B754C0]─────────────────────────────
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : │   Time   : 226 ms  🟢 FAST
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : └─[TRACE:6A4CA420]─────────────────────────────
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : │   Time   : 322 ms  🟢 FAST
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : │   Time   : 324 ms  🟢 FAST
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : └─[TRACE:24F54ACE]─────────────────────────────
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : └─[TRACE:3D626405]─────────────────────────────
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-29] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 322 ms
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 226 ms
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : │   Time   : 324 ms  🟢 FAST
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : └─[TRACE:D554D299]─────────────────────────────
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-2] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 324 ms
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-14] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 348 ms
+2026-05-19T10:01:50.361+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : │   Time   : 315 ms  🟢 FAST
+2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : │   Time   : 326 ms  🟢 FAST
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : AOP -> String com.example.demo2.loadbalancer.LoadBalancerService.handleWithLoadBalancing(int) executed in 226 ms
+2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : └─[TRACE:64A4409F]─────────────────────────────
+2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-27] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 326 ms
+2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : │ ■ END    : LoadBalancerController.withLoadBalancing(..)
+2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : │   Time   : 228 ms  🟢 FAST
+2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : └─[TRACE:04D9F0D4]─────────────────────────────
+2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-30] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 228 ms
+2026-05-19T10:01:50.366+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : │   Time   : 358 ms  🟢 FAST
+2026-05-19T10:01:50.368+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-11] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 324 ms
+2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : └─[TRACE:E5AD65A2]─────────────────────────────
+2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : └─[TRACE:7DAD98F3]─────────────────────────────
+2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 315 ms
+2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 358 ms

@@ -2,6 +2,8 @@ package com.example.demo2;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +21,8 @@ public class PerformanceAspect {
     // ① LOGGING + ② PERFORMANCE + ③ TRACING
     // @Around = يحيط الـ method من الجانبين
     // ═══════════════════════════════════════════════════
-    @Around("execution(* com.example.demo2.service.*.*(..))")
+    @Around("execution(* com.example.demo2..*.*(..)) && " +
+            "!execution(* com.example.demo2.loadbalancer.VirtualServer.*(..))")
     public Object measureTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
         String methodName = joinPoint.getSignature().toShortString();
@@ -45,6 +48,7 @@ public class PerformanceAspect {
         Object result = joinPoint.proceed();
 
         long duration = System.currentTimeMillis() - start;
+        long end = System.currentTimeMillis();
 
         // تصنيف الأداء
         String performance = duration < 5000  ? "🟢 FAST"
@@ -54,6 +58,9 @@ public class PerformanceAspect {
         logger.info("│ ■ END    : {}", methodName);
         logger.info("│   Time   : {} ms  {}", duration, performance);
         logger.info("└─[TRACE:{}]─────────────────────────────", traceId);
+        logger.info("AOP -> {} executed in {} ms",
+                joinPoint.getSignature(),
+                (end - start));
 
         // تنظيف الـ MDC بعد انتهاء الـ request
         MDC.remove("traceId");
