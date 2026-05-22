@@ -22,7 +22,6 @@ public class CheckoutController {
         this.orderService = orderService;
     }
 
-    // BEFORE: Synchronous Processing
     @PostMapping("/legacy/{productId}")
     public ResponseEntity<CheckoutService.CheckoutResult> checkoutLegacy(
             @PathVariable Long productId,
@@ -32,7 +31,6 @@ public class CheckoutController {
         return ResponseEntity.ok(result);
     }
 
-    // AFTER: Asynchronous Processing
     @PostMapping("/async/{productId}")
     public ResponseEntity<CheckoutService.CheckoutResult> checkoutAsync(
             @PathVariable Long productId,
@@ -42,7 +40,6 @@ public class CheckoutController {
         return ResponseEntity.ok(result);
     }
 
-    // Thread Pool Comparison
     @PostMapping("/order/legacy/{productId}")
     public ResponseEntity<String> orderLegacy(
             @PathVariable Long productId,
@@ -61,7 +58,6 @@ public class CheckoutController {
         return ResponseEntity.ok(result);
     }
 
-    // Statistics Endpoints
     @GetMapping("/stats/pool")
     public ResponseEntity<OrderService.ThreadPoolStats> getPoolStats() {
         return ResponseEntity.ok(orderService.getPoolStats());

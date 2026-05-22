@@ -13,7 +13,6 @@ public class PerformanceAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(PerformanceAspect.class);
 
-    // ✅ الإصلاح: أضفنا service.* حتى يشمل الـ subpackage
     @Around("execution(* com.example.demo2.service.*.*(..))")
     public Object measureTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
@@ -22,14 +21,13 @@ public class PerformanceAspect {
 
         long start = System.currentTimeMillis();
 
-        Object result = joinPoint.proceed(); // تنفيذ الـ method الأصلية
+        Object result = joinPoint.proceed();
 
         long duration = System.currentTimeMillis() - start;
 
-        // تصنيف الأداء
-        String performance = duration < 100  ? "🟢 FAST"
-                : duration < 1000 ? "🟡 MEDIUM"
-                : "🔴 SLOW";
+        String performance = duration < 100  ? " FAST"
+                : duration < 1000 ? " MEDIUM"
+                : " SLOW";
 
         logger.info("╔══ AOP MONITOR ══════════════════════════════");
         logger.info("║ Method  : {}", methodName);
