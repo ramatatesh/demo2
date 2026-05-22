@@ -35,16 +35,14 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    // BEFORE: Race Condition Problem
     public String buyProductLegacy(Long productId, int quantity) {
         Optional<Product> productOpt = productRepository.findById(productId);
         if (productOpt.isEmpty()) {
-            return "المنتج غير موجود ❌";
+            return "المنتج غير موجود ";
         }
 
         Product product = productOpt.get();
         
-        // إضافة تأخير اصطناعي لإظهار Race Condition
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
@@ -54,23 +52,22 @@ public class ProductService {
         if (product.getStockQuantity() >= quantity) {
             product.setStockQuantity(product.getStockQuantity() - quantity);
             productRepository.save(product);
-            return "تم شراء " + quantity + " بنجاح (Legacy) ✅";
+            return "تم شراء " + quantity + " بنجاح (Legacy)";
         } else {
-            return "الكمية غير متوفرة ❌";
+            return "الكمية غير متوفرة ";
         }
     }
 
-    // AFTER: Solution with Pessimistic Locking
     @Transactional
     public String buyProductOptimized(Long productId, int quantity) {
         Product product = productRepository.findByIdForUpdate(productId)
-                .orElseThrow(() -> new RuntimeException("المنتج غير موجود ❌"));
+                .orElseThrow(() -> new RuntimeException("المنتج غير موجود "));
 
         if (product.getStockQuantity() >= quantity) {
             product.setStockQuantity(product.getStockQuantity() - quantity);
-            return "تم الشراء بنجاح (Optimized) ✅";
+            return "تم الشراء بنجاح (Optimized) ";
         } else {
-            return "الكمية غير متوفرة ❌";
+            return "الكمية غير متوفرة ";
         }
     }
 }

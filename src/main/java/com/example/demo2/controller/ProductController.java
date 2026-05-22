@@ -37,7 +37,6 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    // Toggle للمتطلب الأول (موجود عندك)
     @PostMapping("/buy/{id}")
     public String buy(@PathVariable Long id,
                       @RequestBody Product request,
@@ -49,12 +48,6 @@ public class ProductController {
         }
     }
 
-    // ══════════════════════════════════════════
-    // Toggle للمتطلب الثاني: Thread Pool
-    // ══════════════════════════════════════════
-
-    // ?useFix=false → Legacy (بدون Thread Pool)
-    // ?useFix=true  → مع Thread Pool
     @PostMapping("/order/{id}")
     public String placeOrder(
             @PathVariable Long id,
@@ -63,28 +56,18 @@ public class ProductController {
     ) throws Exception {
 
         if (useFix) {
-            // الحل: نُرسل الطلب إلى Thread Pool
             Future<String> future = orderService.processOrderWithPool(id, qty);
-            // future.get() ينتظر النتيجة (blocking للتبسيط)
             return future.get();
         } else {
-            // المشكلة: ينفذ مباشرة في thread الـ HTTP request
             return orderService.processOrderLegacy(id, qty);
         }
     }
 
-    // Endpoint لعرض إحصائيات الـ Thread Pool (مهم جداً للعرض)
     @GetMapping("/pool/stats")
     public OrderService.ThreadPoolStats poolStats() {
         return orderService.getPoolStats();
     }
 
-    // ══════════════════════════════════════
-    // Toggle للمتطلب الثالث: Async Queue
-    // ══════════════════════════════════════
-
-    // ?useFix=false → Synchronous (المشكلة: انتظار ~4350ms)
-    // ?useFix=true  → Asynchronous (الحل: رد فوري ~55ms)
     @PostMapping("/checkout/{productId}")
     public CheckoutService.CheckoutResult checkout(
             @PathVariable Long productId,
@@ -98,8 +81,6 @@ public class ProductController {
             return checkoutService.checkoutLegacy(productId, email);
         }
     }
-
-    // إحصائيات الـ Queue (للعرض أمام المعيدة)
     @GetMapping("/queue/stats")
     public AsyncQueueService.QueueStats queueStats() {
         return checkoutService.getQueueStats();

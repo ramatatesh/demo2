@@ -1337,3 +1337,41 @@ Caused by: java.net.ConnectException: Connection refused: getsockopt
 2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : └─[TRACE:7DAD98F3]─────────────────────────────
 2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-16] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 315 ms
 2026-05-19T10:01:50.370+03:00  INFO 14616 --- [demo2] [http-nio-8080-exec-10] com.example.demo2.PerformanceAspect      : AOP -> ResponseEntity com.example.demo2.loadbalancer.LoadBalancerController.withLoadBalancing(int) executed in 358 ms
+2026-05-22T17:21:34.858+03:00  INFO 14708 --- [demo2] [main] com.example.demo2.Demo2Application       : Starting Demo2Application using Java 25.0.1 with PID 14708 (C:\Users\ASUS\Desktop\Project 4th\Parallel programming\demo2\target\classes started by ASUS in C:\Users\ASUS\Desktop\Project 4th\Parallel programming\demo2)
+2026-05-22T17:21:34.861+03:00 DEBUG 14708 --- [demo2] [main] com.example.demo2.Demo2Application       : Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-05-22T17:21:34.862+03:00  INFO 14708 --- [demo2] [main] com.example.demo2.Demo2Application       : No active profile set, falling back to 1 default profile: "default"
+2026-05-22T17:21:35.507+03:00  INFO 14708 --- [demo2] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-22T17:21:35.577+03:00  INFO 14708 --- [demo2] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 2 JPA repository interfaces.
+2026-05-22T17:21:36.611+03:00  INFO 14708 --- [demo2] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-22T17:21:36.635+03:00  INFO 14708 --- [demo2] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-22T17:21:36.635+03:00  INFO 14708 --- [demo2] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-05-22T17:21:36.723+03:00  INFO 14708 --- [demo2] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-22T17:21:36.724+03:00  INFO 14708 --- [demo2] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1802 ms
+2026-05-22T17:21:37.020+03:00  INFO 14708 --- [demo2] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-22T17:21:37.110+03:00  INFO 14708 --- [demo2] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-05-22T17:21:37.171+03:00  INFO 14708 --- [demo2] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-22T17:21:37.461+03:00  INFO 14708 --- [demo2] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-22T17:21:37.497+03:00  INFO 14708 --- [demo2] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-22T17:21:37.657+03:00  INFO 14708 --- [demo2] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4fbaa7f5
+2026-05-22T17:21:37.659+03:00  INFO 14708 --- [demo2] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-22T17:21:37.714+03:00  WARN 14708 --- [demo2] [main] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2026-05-22T17:21:37.719+03:00  WARN 14708 --- [demo2] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-22T17:21:38.473+03:00  INFO 14708 --- [demo2] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-22T17:21:38.536+03:00  INFO 14708 --- [demo2] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-22T17:21:39.139+03:00  INFO 14708 --- [demo2] [main] c.e.demo2.service.AsyncQueueService      : ✅ Async Queue Worker started
+2026-05-22T17:21:39.164+03:00  INFO 14708 --- [demo2] [main] com.example.demo2.PerformanceAspect      : ┌─[TRACE:C8A7B734]─────────────────────────────
+2026-05-22T17:21:39.165+03:00  INFO 14708 --- [demo2] [main] com.example.demo2.PerformanceAspect      : │ ▶ START  : ThreadPoolConfig.orderThreadPool()
+2026-05-22T17:21:39.165+03:00  INFO 14708 --- [demo2] [main] com.example.demo2.PerformanceAspect      : │   Thread : main
+2026-05-22T17:21:39.166+03:00  INFO 14708 --- [demo2] [main] com.example.demo2.PerformanceAspect      : │ ■ END    : ThreadPoolConfig.orderThreadPool()
+2026-05-22T17:21:39.166+03:00  INFO 14708 --- [demo2] [main] com.example.demo2.PerformanceAspect      : │   Time   : 1 ms  🟢 FAST
+2026-05-22T17:21:39.166+03:00  INFO 14708 --- [demo2] [main] com.example.demo2.PerformanceAspect      : └─[TRACE:C8A7B734]─────────────────────────────
+2026-05-22T17:21:39.167+03:00  INFO 14708 --- [demo2] [main] com.example.demo2.PerformanceAspect      : AOP -> ThreadPoolExecutor com.example.demo2.config.ThreadPoolConfig.orderThreadPool() executed in 1 ms
+2026-05-22T17:21:39.211+03:00  INFO 14708 --- [demo2] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-22T17:21:39.637+03:00  INFO 14708 --- [demo2] [main] c.e.d.loadbalancer.LoadBalancerService   : 🚀 Load Balancer initialized with 3 virtual servers
+2026-05-22T17:21:39.746+03:00  WARN 14708 --- [demo2] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-22T17:21:40.629+03:00  INFO 14708 --- [demo2] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-05-22T17:21:40.646+03:00  INFO 14708 --- [demo2] [main] com.example.demo2.Demo2Application       : Started Demo2Application in 6.302 seconds (process running for 6.958)
+2026-05-22T17:40:46.239+03:00  INFO 14708 --- [demo2] [SpringApplicationShutdownHook] c.e.demo2.service.AsyncQueueService      : 🛑 Async Queue Worker stopped. Processed: 0
+2026-05-22T17:40:46.239+03:00  INFO 14708 --- [demo2] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-22T17:40:46.242+03:00  INFO 14708 --- [demo2] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-22T17:40:46.247+03:00  INFO 14708 --- [demo2] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
