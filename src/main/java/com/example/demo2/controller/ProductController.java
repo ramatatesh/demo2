@@ -1,88 +1,64 @@
 package com.example.demo2.controller;
 
 import com.example.demo2.model.Product;
-import com.example.demo2.service.AsyncQueueService;
-import com.example.demo2.service.CheckoutService;
-import com.example.demo2.service.OrderService;
 import com.example.demo2.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+    @Autowired
+    private ProductService productService;
 
-    private final ProductService productService;
-    private final OrderService orderService;
-    private final CheckoutService checkoutService;
+    @GetMapping
+    public List<Product> getAllProducts(@RequestParam(required = false, defaultValue = "false") boolean useCache) {
+        System.out.println("استعلام API: جلب كل المنتجات - useCache=" + useCache);
+        return productService.getAllProducts(useCache);
+    }
 
-    public ProductController(
-            ProductService productService,
-            OrderService orderService,
-            CheckoutService checkoutService
-    ) {
-        this.productService = productService;
-        this.orderService = orderService;
-        this.checkoutService = checkoutService;
+    @GetMapping("/{id}")
+    public Product getProductById(@PathVariable Long id,
+                                  @RequestParam(required = false, defaultValue = "false") boolean useCache) {
+        System.out.println("استعلام API: جلب المنتج برقم " + id + " - useCache=" + useCache);
+        Optional<Product> product = productService.getProductById(id, useCache);
+        return product.orElseThrow(() -> new RuntimeException("Product not found"));
     }
 
     @PostMapping
-    public Product add(@RequestBody Product p) {
-        return productService.addProduct(p);
+    public Product addProduct(@RequestBody Product product) {
+        System.out.println("استعلام API: إضافة منتج جديد");
+        return productService.addProduct(product);
     }
 
-    @GetMapping
-    public List<Product> all() {
-        return productService.getAllProducts();
+    @PutMapping("/{id}")
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        System.out.println("استعلام API: تحديث منتج رقم " + id);
+        return productService.updateProduct(id, product);
     }
 
-    @PostMapping("/buy/{id}")
-    public String buy(@PathVariable Long id,
-                      @RequestBody Product request,
-                      @RequestParam(defaultValue = "false") boolean useFix) {
-        if (useFix) {
-            return productService.buyProductOptimized(id, request.getStockQuantity());
-        } else {
-            return productService.buyProductLegacy(id, request.getStockQuantity());
-        }
+    @DeleteMapping("/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        System.out.println("استعلام API: حذف منتج رقم " + id);
+        productService.deleteProduct(id);
+        return "Product deleted";
     }
 
-    @PostMapping("/order/{id}")
-    public String placeOrder(
-            @PathVariable Long id,
-            @RequestParam(defaultValue = "1") int qty,
-            @RequestParam(defaultValue = "false") boolean useFix
-    ) throws Exception {
 
-        if (useFix) {
-            Future<String> future = orderService.processOrderWithPool(id, qty);
-            return future.get();
-        } else {
-            return orderService.processOrderLegacy(id, qty);
-        }
-    }
+    @PostMapping("/buy")
+    public ResponseEntity<String> buyProduct(
+            @RequestParam Long productId,
+            @RequestParam int quantity,
+            @RequestParam boolean useLock) { // استقبال الـ toggle من الطلب
 
-    @GetMapping("/pool/stats")
-    public OrderService.ThreadPoolStats poolStats() {
-        return orderService.getPoolStats();
-    }
+        boolean success = productService.buyProduct(productId, quantity, useLock);
 
-    @PostMapping("/checkout/{productId}")
-    public CheckoutService.CheckoutResult checkout(
-            @PathVariable Long productId,
-            @RequestParam(defaultValue = "customer@example.com") String email,
-            @RequestParam(defaultValue = "false") boolean useFix
-    ) throws Exception {
-
-        if (useFix) {
-            return checkoutService.checkoutAsync(productId, email);
-        } else {
-            return checkoutService.checkoutLegacy(productId, email);
-        }
-    }
-    @GetMapping("/queue/stats")
-    public AsyncQueueService.QueueStats queueStats() {
-        return checkoutService.getQueueStats();
+        return success
+                ? ResponseEntity.ok("تمت العملية بنجاح")
+                : ResponseEntity.status(423).body("فشلت العملية (بسبب تعارض الأقفال أو نفاد الكمية)");
     }
 }

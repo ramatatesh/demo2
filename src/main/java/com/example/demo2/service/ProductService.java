@@ -2,72 +2,155 @@ package com.example.demo2.service;
 
 import com.example.demo2.model.Product;
 import com.example.demo2.repository.ProductRepository;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ProductService {
-
-    private final ProductRepository productRepository;
+    private static final String PRODUCT_KEY_PREFIX = "product:";
+    private static final String PRODUCT_LIST_KEY = "products:all";
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    private ProductRepository productRepository;
+
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
+    @Autowired
+    private RedissonClient redissonClient;
+
+    // ─── [القسم الأول: الكاش] ──────────────────────────────────────────────────
+    public List<Product> getAllProducts(boolean useCache) {
+        if (!useCache) {
+            System.out.println("بدون كاش: جاري جلب كل المنتجات من قاعدة البيانات");
+            return productRepository.findAll();
+        } else {
+            System.out.println("مع كاش: محاولة الحصول على كل المنتجات من Redis");
+            List<Product> products = (List<Product>) redisTemplate.opsForValue().get(PRODUCT_LIST_KEY);
+            if (products != null) {
+                System.out.println("مع كاش: تم جلب كل المنتجات من Redis ✅");
+                return products;
+            } else {
+                System.out.println("مع كاش: لم يتم العثور على المنتجات في Redis. جاري جلبهم من قاعدة البيانات...");
+                List<Product> dbProducts = productRepository.findAll();
+                redisTemplate.opsForValue().set(PRODUCT_LIST_KEY, dbProducts);
+                return dbProducts;
+            }
+        }
+    }
+
+    public Optional<Product> getProductById(Long id, boolean useCache) {
+        String productKey = PRODUCT_KEY_PREFIX + id;
+        if (!useCache) {
+            return productRepository.findById(id);
+        } else {
+            Product cachedProduct = (Product) redisTemplate.opsForValue().get(productKey);
+            if (cachedProduct != null) return Optional.of(cachedProduct);
+            Optional<Product> dbProduct = productRepository.findById(id);
+            dbProduct.ifPresent(product -> redisTemplate.opsForValue().set(productKey, product));
+            return dbProduct;
+        }
     }
 
     public Product addProduct(Product product) {
-        return productRepository.save(product);
+        Product saved = productRepository.save(product);
+        redisTemplate.opsForValue().set(PRODUCT_KEY_PREFIX + saved.getId(), saved);
+        redisTemplate.delete(PRODUCT_LIST_KEY);
+        return saved;
     }
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
-
-    public Optional<Product> getProductById(Long id) {
-        return productRepository.findById(id);
+    public Product updateProduct(Long id, Product newData) {
+        Product updated = productRepository.findById(id).map(prod -> {
+            prod.setName(newData.getName());
+            prod.setStockQuantity(newData.getStockQuantity());
+            return productRepository.save(prod);
+        }).orElseThrow(() -> new RuntimeException("Product not found"));
+        redisTemplate.opsForValue().set(PRODUCT_KEY_PREFIX + updated.getId(), updated);
+        redisTemplate.delete(PRODUCT_LIST_KEY);
+        return updated;
     }
 
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
+        redisTemplate.delete(PRODUCT_KEY_PREFIX + id);
+        redisTemplate.delete(PRODUCT_LIST_KEY);
     }
 
-    public String buyProductLegacy(Long productId, int quantity) {
+
+    // ─── [القسم الثاني: الشراء والتحكم بالتزامن (الحالتين معاً)] ────────────────────────
+
+    /**
+     * دالة الشراء المرنة: تدعم الشراء العادي (قبل الحل) والشراء الآمن بالـ Lock (بعد الحل)
+     */
+    public boolean buyProduct(Long productId, int quantity, boolean useLock) {
+
+        // [الحالة الأولى: بدون قفل - قبل الحل] ❌
+        if (!useLock) {
+            System.out.println("⚠️ [بدون LOCK]: خيط معالجة يدخل مباشرة بدون حماية لتعديل المنتج: " + productId);
+            return executePurchaseLogic(productId, quantity);
+        }
+
+        // [الحالة الثانية: باستخدام الـ Distributed Lock - بعد الحل] ✅
+        String lockKey = "productLock:" + productId;
+        RLock lock = redissonClient.getLock(lockKey);
+        boolean acquired = false;
+
+        try {
+            System.out.println("🔒 [مع LOCK]: محاولة حجز القفل الموزع للمنتج: " + productId);
+            acquired = lock.tryLock(5, 10, TimeUnit.SECONDS);
+
+            if (!acquired) {
+                System.out.println("❌ [مع LOCK]: فشل الحصول على القفل بسبب ضغط الطلبات التنافسية.");
+                return false;
+            }
+
+            // تنفيذ الشراء داخل الحماية الموزعة
+            return executePurchaseLogic(productId, quantity);
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("❗ توقف تنفيذ الخيط.");
+            return false;
+        } finally {
+            if (acquired) {
+                lock.unlock(); // فتح القفل دائماً لتمرير الطلب التالي
+                System.out.println("🔓 [مع LOCK]: تم تحرير القفل بنجاح.");
+            }
+        }
+    }
+
+    /**
+     * دالة مساعدة داخلية لتنفيذ منطق الخصم الفعلي من المستودع وتحديث الكاش
+     */
+    private boolean executePurchaseLogic(Long productId, int quantity) {
         Optional<Product> productOpt = productRepository.findById(productId);
         if (productOpt.isEmpty()) {
-            return "المنتج غير موجود ";
+            System.out.println("❗ المنتج غير موجود!");
+            return false;
         }
 
         Product product = productOpt.get();
-        
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        if (product.getStockQuantity() < quantity) {
+            System.out.println("🛑 كمية المستودع الحالية (" + product.getStockQuantity() + ") أقل من المطلوب (" + quantity + ")");
+            return false;
         }
 
-        if (product.getStockQuantity() >= quantity) {
-            product.setStockQuantity(product.getStockQuantity() - quantity);
-            productRepository.save(product);
-            return "تم شراء " + quantity + " بنجاح (Legacy)";
-        } else {
-            return "الكمية غير متوفرة ";
-        }
-    }
+        // خصم الكمية وحفظها
+        product.setStockQuantity(product.getStockQuantity() - quantity);
+        productRepository.save(product);
 
-    @Transactional
-    public String buyProductOptimized(Long productId, int quantity) {
-        Product product = productRepository.findByIdForUpdate(productId)
-                .orElseThrow(() -> new RuntimeException("المنتج غير موجود "));
+        // تزامن صحة البيانات مع الكاش
+        redisTemplate.opsForValue().set(PRODUCT_KEY_PREFIX + product.getId(), product);
+        redisTemplate.delete(PRODUCT_LIST_KEY);
 
-        if (product.getStockQuantity() >= quantity) {
-            product.setStockQuantity(product.getStockQuantity() - quantity);
-            return "تم الشراء بنجاح (Optimized) ";
-        } else {
-            return "الكمية غير متوفرة ";
-        }
+        System.out.println("✨ نجاح التحديث في قاعدة البيانات. الكمية المتبقية الحالية: " + product.getStockQuantity());
+        return true;
     }
 }
