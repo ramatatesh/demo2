@@ -7,6 +7,8 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -153,4 +155,54 @@ public class ProductService {
         System.out.println("✨ نجاح التحديث في قاعدة البيانات. الكمية المتبقية الحالية: " + product.getStockQuantity());
         return true;
     }
+
+    /**
+     * decreaseStockInTransaction:
+     * ────────────────────────────
+     * هذه هي دالة "decreaseStock()" المُشار إليها في متطلب 8.
+     * صُمِّمت خصيصاً لتُستدعى من داخل transaction خارجية في TransactionService.
+     *
+     * الفرق بينها وبين buyProduct():
+     *   buyProduct()               → مع/بدون Redisson Lock (للمتطلب 7)
+     *   decreaseStockInTransaction() → داخل DB Transaction فقط (للمتطلب 8)
+     *
+     * @Transactional(propagation = Propagation.REQUIRED):
+     *   - إذا استُدعيت من داخل TransactionService.placeOrderWithTransaction()
+     *     (التي هي @Transactional) → تنضم للـ transaction الخارجية.
+     *   - إذا استُدعيت من خارج أي transaction → تُنشئ transaction خديمة خاصة بها.
+     *
+     * findByIdForUpdate(): موجودة بالفعل في ProductRepository مع PESSIMISTIC_WRITE.
+     * هذا يقفل الصف أثناء الـ transaction لمنع التعارض مع threads أخرى.
+     *
+     * @param productId رقم المنتج
+     * @param quantity الكمية المراد خصمها
+     * @throws RuntimeException إذا كان المخزون غير كافٍ → يُشغّل ROLLBACK في الـ transaction الخارجية
+     */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void decreaseStockInTransaction(Long productId, int quantity) {
+        // findByIdForUpdate يستخدم SELECT ... FOR UPDATE لقفل الصف
+        // هذا موجود بالفعل في ProductRepository
+        var productOpt = productRepository.findByIdForUpdate(productId);
+
+        if (productOpt.isEmpty()) {
+            throw new RuntimeException("Product not found: id=" + productId);
+        }
+
+        var product = productOpt.get();
+
+        if (product.getStockQuantity() < quantity) {
+            throw new RuntimeException(
+                    "Insufficient stock for productId=" + productId
+                            + ". Available=" + product.getStockQuantity()
+                            + ", Requested=" + quantity
+            );
+        }
+
+        product.setStockQuantity(product.getStockQuantity() - quantity);
+        productRepository.save(product);
+
+        System.out.println("   📦 [ProductService] تم تخفيض المخزون: productId="
+                + productId + ", remaining=" + product.getStockQuantity());
+    }
+
 }
