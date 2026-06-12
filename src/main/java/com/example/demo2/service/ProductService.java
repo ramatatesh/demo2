@@ -9,7 +9,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -32,9 +31,15 @@ public class ProductService {
     public List<Product> getAllProducts(boolean useCache) {
         if (!useCache) {
             System.out.println("بدون كاش: جاري جلب كل المنتجات من قاعدة البيانات");
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
             return productRepository.findAll();
         } else {
             System.out.println("مع كاش: محاولة الحصول على كل المنتجات من Redis");
+
             List<Product> products = (List<Product>) redisTemplate.opsForValue().get(PRODUCT_LIST_KEY);
             if (products != null) {
                 System.out.println("مع كاش: تم جلب كل المنتجات من Redis ✅");
