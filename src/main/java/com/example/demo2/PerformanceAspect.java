@@ -20,7 +20,6 @@ public class PerformanceAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(PerformanceAspect.class);
 
-
     private static final ConcurrentHashMap<String, AtomicInteger> callCounts = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, AtomicLong> totalDurations = new ConcurrentHashMap<>();
 
@@ -43,6 +42,7 @@ public class PerformanceAspect {
 
     @Around("execution(* com.example.demo2..*.*(..)) && " +
             "!execution(* com.example.demo2.loadbalancer.VirtualServer.*(..))")
+
     public Object measureTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
         String methodName = joinPoint.getSignature().toShortString();

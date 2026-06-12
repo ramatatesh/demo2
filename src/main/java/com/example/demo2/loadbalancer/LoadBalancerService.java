@@ -3,6 +3,7 @@ package com.example.demo2.loadbalancer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,75 +16,107 @@ public class LoadBalancerService {
             LoggerFactory.getLogger(LoadBalancerService.class);
 
 
-    private final List<VirtualServer> servers = new ArrayList<>();
+    private static final String[] servers = {
+            "http://localhost:8080",
+            "http://localhost:8081",
+            "http://localhost:8082"
+    };
+
+    private final RestTemplate restTemplate = new RestTemplate();
 
     private final AtomicInteger roundRobinCounter = new AtomicInteger(0);
+    private final AtomicInteger totalRequests     = new AtomicInteger(0);
 
-    private final AtomicInteger totalRequests = new AtomicInteger(0);
+    private final AtomicInteger[] serverCounts = {
+            new AtomicInteger(0),
+            new AtomicInteger(0),
+            new AtomicInteger(0)
+    };
 
-    public LoadBalancerService() {
-        servers.add(new VirtualServer("Server-1"));
-        servers.add(new VirtualServer("Server-2"));
-        servers.add(new VirtualServer("Server-3"));
+    public String handleWithoutLoadBalancing() {
+        int taskNumber = totalRequests.incrementAndGet();
+        serverCounts[0].incrementAndGet();
 
-        logger.info(" Load Balancer initialized with {} virtual servers",
-                servers.size());
+        String targetServer = servers[0];
+        logger.info("Task {} -> Handled by node on port 8080", taskNumber);
+
+        try {
+            String response = restTemplate.getForObject(
+                    targetServer + "/products", String.class
+            );
+            return "Task " + taskNumber +
+                    " -> Handled by node on port 8080" +
+                    " | Real Response received: YES";
+        } catch (Exception e) {
+            return "Task " + taskNumber +
+                    " -> Handled by node on port 8080" +
+                    " | Error: " + e.getMessage();
+        }
+    }
+
+    private boolean isServerAlive(String serverUrl) {
+        try {
+            restTemplate.getForObject(serverUrl + "/products/instance", String.class);
+            return true;
+        } catch (Exception e) {
+            logger.warn("Health Check Failed for server: {}", serverUrl);
+            return false;
+        }
     }
 
 
-    public String handleWithoutLoadBalancing(int processingTimeMs) {
+    public String handleWithLoadBalancing() {
+        int taskNumber = totalRequests.incrementAndGet();
+        int index = 0;
+        String targetServer = "";
+        int port = 8080;
+        boolean foundAliveServer = false;
+        for (int i = 0; i < servers.length; i++) {
+            index = roundRobinCounter.getAndIncrement() % servers.length;
+            targetServer = servers[index];
+            port = 8080 + index;
 
-        totalRequests.incrementAndGet();
-        VirtualServer singleServer = servers.get(0);
-
-        logger.info("[NO Load Balancing] كل الطلبات تذهب إلى: {}",
-                singleServer.getName());
-
-        String result = singleServer.handleRequest(processingTimeMs);
-
-        logger.info("[NO Load Balancing] نتيجة: {}", result);
-
-        return result;
+            if (isServerAlive(targetServer)) {
+                foundAliveServer = true;
+                break;
+            }
+            logger.info("Task {} -> Server on port {} is DOWN, trying next...", taskNumber, port);
+        }
+        if (!foundAliveServer) {
+            return "Task " + taskNumber + " -> All servers are DOWN! | Real Response received: NO";
+        }
+        serverCounts[index].incrementAndGet();
+        logger.info("Task {} -> Handled by HEALTHY node on port {}", taskNumber, port);
+        try {
+            String response = restTemplate.getForObject(targetServer + "/products", String.class);
+            return "Task " + taskNumber +
+                    " -> Handled by node on port " + port +
+                    " | Real Response received: YES";
+        } catch (Exception e) {
+            return "Task " + taskNumber +
+                    " -> Handled by node on port " + port +
+                    " | Error: " + e.getMessage();
+        }
     }
 
-    public String handleWithLoadBalancing(int processingTimeMs) {
-
-        totalRequests.incrementAndGet();
-
-
-        int serverIndex = roundRobinCounter.getAndIncrement() % servers.size();
-        VirtualServer selectedServer = servers.get(serverIndex);
-
-        logger.info(" [Load Balancer] وجّه الطلب إلى: {} (Index: {})",
-                selectedServer.getName(), serverIndex);
-
-        String result = selectedServer.handleRequest(processingTimeMs);
-
-        logger.info(" [Load Balancer] نتيجة: {}", result);
-
-        return result;
-    }
-
+    //  إحصائيات
     public List<ServerStats> getStats() {
-
         List<ServerStats> stats = new ArrayList<>();
-
-        for (VirtualServer server : servers) {
+        for (int i = 0; i < servers.length; i++) {
             stats.add(new ServerStats(
-                    server.getName(),
-                    server.getRequestCount(),
-                    server.getAverageProcessingTime()
+                    "port " + (8080 + i),
+                    serverCounts[i].get(),
+                    0
             ));
         }
-
         return stats;
     }
 
     public void resetAll() {
-        servers.forEach(VirtualServer::reset);
         roundRobinCounter.set(0);
         totalRequests.set(0);
-        logger.info(" تم إعادة ضبط كل السيرفرات");
+        for (AtomicInteger c : serverCounts) c.set(0);
+        logger.info("Reset completed");
     }
 
     public int getTotalRequests() {
@@ -96,8 +129,8 @@ public class LoadBalancerService {
         public double avgProcessingTimeMs;
 
         public ServerStats(String name, int requests, double avgTime) {
-            this.serverName = name;
-            this.requestsHandled = requests;
+            this.serverName          = name;
+            this.requestsHandled     = requests;
             this.avgProcessingTimeMs = avgTime;
         }
     }

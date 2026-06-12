@@ -5,6 +5,7 @@ import com.example.demo2.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+
+    @Value("${server.port}")
+    private String port;
+
     @Autowired
     private ProductService productService;
 
@@ -60,5 +65,10 @@ public class ProductController {
         return success
                 ? ResponseEntity.ok("تمت العملية بنجاح")
                 : ResponseEntity.status(423).body("فشلت العملية (بسبب تعارض الأقفال أو نفاد الكمية)");
+    }
+
+    @GetMapping("/instance")
+    public String instance() {
+        return "Running on port: " + port;
     }
 }
