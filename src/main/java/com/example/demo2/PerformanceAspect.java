@@ -16,8 +16,7 @@ import java.util.UUID;
 public class PerformanceAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(PerformanceAspect.class);
-    @Around("execution(* com.example.demo2..*.*(..)) && " +
-            "!execution(* com.example.demo2.loadbalancer.VirtualServer.*(..))")
+    @Around("execution(* com.example.demo2..*.*(..)) " )
     public Object measureTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
         String methodName = joinPoint.getSignature().toShortString();
