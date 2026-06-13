@@ -40,8 +40,7 @@ public class PerformanceAspect {
         return count == null ? 0 : count.get();
     }
 
-    @Around("execution(* com.example.demo2..*.*(..)) && " +
-            "!execution(* com.example.demo2.loadbalancer.VirtualServer.*(..))")
+    @Around("execution(* com.example.demo2..*.*(..)) ")
 
     public Object measureTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
