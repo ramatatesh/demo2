@@ -2,7 +2,9 @@ package com.example.demo2.controller;
 
 import com.example.demo2.model.Product;
 import com.example.demo2.service.ProductService;
+import com.example.demo2.service.ProductService1;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,12 +16,17 @@ import java.util.Optional;
 @RequestMapping("/products")
 public class ProductController {
 
+    private final ProductService1 productService1;
+
+    public ProductController(ProductService1 productService1) {
+        this.productService1 = productService1;
+    }
     @Value("${server.port}")
     private String port;
 
     @Autowired
     private ProductService productService;
-
+    private  ProductService1 service;
     @GetMapping
     public List<Product> getAllProducts(@RequestParam(required = false, defaultValue = "false") boolean useCache) {
         System.out.println("استعلام API: جلب كل المنتجات - useCache=" + useCache);
@@ -58,13 +65,34 @@ public class ProductController {
     public ResponseEntity<String> buyProduct(
             @RequestParam Long productId,
             @RequestParam int quantity,
-            @RequestParam boolean useLock) { // استقبال الـ toggle من الطلب
+            @RequestParam boolean useLock) {
 
         boolean success = productService.buyProduct(productId, quantity, useLock);
 
         return success
                 ? ResponseEntity.ok("تمت العملية بنجاح")
                 : ResponseEntity.status(423).body("فشلت العملية (بسبب تعارض الأقفال أو نفاد الكمية)");
+    }
+// للطلب الأول
+
+    @PostMapping("/buy/{id}")
+    public ResponseEntity<String> buy(@PathVariable Long id,
+                                      @RequestBody Product request,
+                                      @RequestParam(defaultValue = "false") boolean useFix) {
+
+        String result;
+
+        if (useFix) {
+            result = productService1.buyProductOptimized(id, request.getStockQuantity());
+        } else {
+            result = productService1.buyProductLegacy(id, request.getStockQuantity());
+        }
+
+        if (result.contains("❌") || result.contains("غير متوفرة") || result.contains("فشل")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+        }
+
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/instance")

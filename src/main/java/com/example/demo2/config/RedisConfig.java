@@ -11,7 +11,7 @@ public class RedisConfig {
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
-        // الإعدادات الافتراضية لـ localhost:6379
+
         return new LettuceConnectionFactory();
     }
 

@@ -42,7 +42,7 @@ public class ProductService {
 
             List<Product> products = (List<Product>) redisTemplate.opsForValue().get(PRODUCT_LIST_KEY);
             if (products != null) {
-                System.out.println("مع كاش: تم جلب كل المنتجات من Redis ✅");
+                System.out.println("مع كاش: تم جلب كل المنتجات من Redis ");
                 return products;
             } else {
                 System.out.println("مع كاش: لم يتم العثور على المنتجات في Redis. جاري جلبهم من قاعدة البيانات...");
@@ -93,42 +93,33 @@ public class ProductService {
 
     // ─── [القسم الثاني: الشراء والتحكم بالتزامن (الحالتين معاً)] ────────────────────────
 
-    /**
-     * دالة الشراء المرنة: تدعم الشراء العادي (قبل الحل) والشراء الآمن بالـ Lock (بعد الحل)
-     */
-    public boolean buyProduct(Long productId, int quantity, boolean useLock) {
 
-        // [الحالة الأولى: بدون قفل - قبل الحل] ❌
+    public boolean buyProduct(Long productId, int quantity, boolean useLock) {
+        // [الحالة الأولى: بدون قفل - قبل الحل]
         if (!useLock) {
-            System.out.println("⚠️ [بدون LOCK]: خيط معالجة يدخل مباشرة بدون حماية لتعديل المنتج: " + productId);
+            System.out.println(" [بدون LOCK]: خيط معالجة يدخل مباشرة بدون حماية لتعديل المنتج: " + productId);
             return executePurchaseLogic(productId, quantity);
         }
-
-        // [الحالة الثانية: باستخدام الـ Distributed Lock - بعد الحل] ✅
+        // [الحالة الثانية: باستخدام الـ Distributed Lock - بعد الحل]
         String lockKey = "productLock:" + productId;
         RLock lock = redissonClient.getLock(lockKey);
         boolean acquired = false;
-
         try {
-            System.out.println("🔒 [مع LOCK]: محاولة حجز القفل الموزع للمنتج: " + productId);
+            System.out.println(" [مع LOCK]: محاولة حجز القفل الموزع للمنتج: " + productId);
             acquired = lock.tryLock(5, 10, TimeUnit.SECONDS);
-
             if (!acquired) {
-                System.out.println("❌ [مع LOCK]: فشل الحصول على القفل بسبب ضغط الطلبات التنافسية.");
+                System.out.println(" [مع LOCK]: فشل الحصول على القفل بسبب ضغط الطلبات التنافسية.");
                 return false;
             }
-
-            // تنفيذ الشراء داخل الحماية الموزعة
             return executePurchaseLogic(productId, quantity);
-
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            System.out.println("❗ توقف تنفيذ الخيط.");
+            System.out.println(" توقف تنفيذ الخيط.");
             return false;
         } finally {
             if (acquired) {
-                lock.unlock(); // فتح القفل دائماً لتمرير الطلب التالي
-                System.out.println("🔓 [مع LOCK]: تم تحرير القفل بنجاح.");
+                lock.unlock();
+                System.out.println(" [مع LOCK]: تم تحرير القفل بنجاح.");
             }
         }
     }
