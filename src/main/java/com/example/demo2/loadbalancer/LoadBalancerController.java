@@ -45,7 +45,7 @@ public class LoadBalancerController {
         return ResponseEntity.ok(response);
     }
 
-    // إحصائيات
+
     @GetMapping("/stats")
     public ResponseEntity<Map<String, Object>> getStats() {
         List<LoadBalancerService.ServerStats> stats =
@@ -57,14 +57,14 @@ public class LoadBalancerController {
         return ResponseEntity.ok(response);
     }
 
-    // Reset
+
     @PostMapping("/reset")
     public ResponseEntity<String> reset() {
         loadBalancerService.resetAll();
         return ResponseEntity.ok("Reset done");
     }
 
-    // مقارنة
+
     @GetMapping("/compare")
     public ResponseEntity<Map<String, Object>> compare() {
         List<LoadBalancerService.ServerStats> stats =

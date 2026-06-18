@@ -75,13 +75,9 @@ public class BenchmarkController {
                 return null;
             });
         }
-
         optimizedExecutor.invokeAll(tasksAfter);
         optimizedExecutor.shutdown();
-
         long totalTimeAfter = System.currentTimeMillis() - startTimeAfter;
-
-
         long avgLatencyAfter = PerformanceAspect.getAverageDuration(targetMethod);
         if (avgLatencyAfter == 0) avgLatencyAfter = 512;
 

@@ -15,10 +15,10 @@ public class ConcurrentLoadTest {
 
     @Test
     public void testBeforeVsAfter() throws Exception {
-        int users = 20; // عدد المستخدمين المتزامنين
+        int users = 20;
 
         // ══ BEFORE: Synchronous ══
-        System.out.println("\n🔴 ===== BEFORE (Synchronous) =====");
+        System.out.println("\n ===== BEFORE (Synchronous) =====");
         long beforeStart = System.currentTimeMillis();
 
         ExecutorService pool = Executors.newFixedThreadPool(users);
@@ -28,23 +28,23 @@ public class ConcurrentLoadTest {
             final int userId = i;
             pool.submit(() -> {
                 try {
-                    // كل "مستخدم" يعمل في thread منفصل
+
                     checkoutService.checkoutLegacy((long) userId, "user" + userId + "@test.com");
                 } catch (Exception e) {
                     System.err.println("Error: " + e.getMessage());
                 } finally {
-                    latch.countDown(); // إشارة "انتهيت"
+                    latch.countDown();
                 }
             });
         }
 
-        latch.await(); // انتظار حتى ينتهي الجميع
+        latch.await();
         long beforeTotal = System.currentTimeMillis() - beforeStart;
-        System.out.println("🔴 BEFORE Total time for " + users + " users: " + beforeTotal + "ms");
+        System.out.println(" BEFORE Total time for " + users + " users: " + beforeTotal + "ms");
         pool.shutdown();
 
-        // ══ AFTER: Asynchronous ══
-        System.out.println("\n🟢 ===== AFTER (Asynchronous) =====");
+        // AFTER: Asynchronous
+        System.out.println("\n ===== AFTER (Asynchronous) =====");
         long afterStart = System.currentTimeMillis();
 
         ExecutorService pool2 = Executors.newFixedThreadPool(users);
@@ -65,10 +65,10 @@ public class ConcurrentLoadTest {
 
         latch2.await();
         long afterTotal = System.currentTimeMillis() - afterStart;
-        System.out.println("🟢 AFTER Total time for " + users + " users: " + afterTotal + "ms");
+        System.out.println(" AFTER Total time for " + users + " users: " + afterTotal + "ms");
         pool2.shutdown();
 
-        System.out.println("\n📊 IMPROVEMENT: " +
+        System.out.println("\n IMPROVEMENT: " +
                 Math.round((1.0 - (double)afterTotal/beforeTotal) * 100) + "% faster");
     }
 }

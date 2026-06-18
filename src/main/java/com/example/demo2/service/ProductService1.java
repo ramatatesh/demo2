@@ -9,10 +9,10 @@ import java.util.List;
 @Service
 public class ProductService1 {
 
-    // كائن غير ساكن ومحمي بـ final لمنع الأخطاء
+
     private final ProductRepository repo;
 
-    // الباني لضمان حقن الاعتماديات (Dependency Injection) من Spring
+
     public ProductService1(ProductRepository repo) {
         this.repo = repo;
     }
@@ -25,11 +25,11 @@ public class ProductService1 {
         return repo.findAll();
     }
 
-    // ─── المسار الأول: (المشكلة قبل الحل) ❌ ───
+
     public String buyProductLegacy(Long id, int qty) {
-        // تعديل: استخدام this.repo للوصول إلى الكائن المُدار
+
         Product p = this.repo.findById(id).orElse(null);
-        if (p == null) return "المنتج غير موجود ❌";
+        if (p == null) return "المنتج غير موجود ";
 
         if (p.getStockQuantity() >= qty) {
             try {
@@ -41,14 +41,14 @@ public class ProductService1 {
             p.setStockQuantity(p.getStockQuantity() - qty);
             Product savedProduct = this.repo.save(p);
 
-            System.out.println("✨ نجاح التحديث في قاعدة البيانات. الكمية المتبقية الحالية: " + savedProduct.getStockQuantity());
+            System.out.println(" نجاح التحديث في قاعدة البيانات. الكمية المتبقية الحالية: " + savedProduct.getStockQuantity());
 
-            return "تم شراء " + qty + " بنجاح (Legacy) ✅";
+            return "تم شراء " + qty + " بنجاح (Legacy) ";
         }
-        return "الكمية غير متوفرة ❌";
+        return "الكمية غير متوفرة ";
     }
 
-    // ─── المسار الثاني: (الحل بعد التطبيق)  ───
+
     @Transactional
     public String buyProductOptimized(Long id, int qty) {
 

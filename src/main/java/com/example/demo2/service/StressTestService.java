@@ -90,21 +90,20 @@ public class StressTestService {
         AtomicLong    minTime      = new AtomicLong(Long.MAX_VALUE);
         AtomicLong    maxTime      = new AtomicLong(0);
 
-        // CountDownLatch(1) = بوابة تُفتح بـ countDown() واحد
+
         CountDownLatch startGate = new CountDownLatch(1);
 
-        // ينتظر انتهاء جميع الـ threads
+
         CountDownLatch endGate = new CountDownLatch(userCount);
 
         ExecutorService executor = Executors.newFixedThreadPool(userCount);
 
-        // الخطوة 1: ننشئ كل الـ threads — كلهم ينتظرون عند البوابة
+
         for (int i = 0; i < userCount; i++) {
             final int userId = i;
             executor.submit(() -> {
                 try {
-                    //  كل thread تنتظر هنا حتى تُفتح البوابة
-                    //   Barrier Sync
+
                     startGate.await();
 
                     long start = System.currentTimeMillis();
@@ -129,10 +128,10 @@ public class StressTestService {
         log.info(" {} thread جاهزة عند البوابة — على وشك الانطلاق!", userCount);
         long testStart = System.currentTimeMillis();
 
-        // الخطوة 2: افتح البوابة → كل الـ threads تنطلق معاً
+
         startGate.countDown();
 
-        // الخطوة 3: انتظر انتهاء الجميع
+
         endGate.await(5, TimeUnit.MINUTES);
         long totalTestTime = System.currentTimeMillis() - testStart;
 
@@ -157,8 +156,7 @@ public class StressTestService {
         return result;
     }
 
-    //  BEFORE: buy تحت الضغط بدون Lock
-    // يُظهر Race Condition → stock يصبح سالباً
+
     public Map<String, Object> stressTestBuyLegacy(int userCount, Long productId)
             throws InterruptedException {
 
@@ -167,7 +165,7 @@ public class StressTestService {
         AtomicInteger success = new AtomicInteger(0);
         AtomicInteger fail    = new AtomicInteger(0);
 
-        // Barrier Sync هنا أيضاً لخلق ضغط حقيقي
+
         CountDownLatch startGate = new CountDownLatch(1);
         CountDownLatch endGate   = new CountDownLatch(userCount);
         ExecutorService executor =
@@ -195,7 +193,7 @@ public class StressTestService {
             });
         }
 
-        startGate.countDown(); // أطلق الجميع!
+        startGate.countDown();
         endGate.await(2, TimeUnit.MINUTES);
         executor.shutdown();
 
@@ -214,12 +212,11 @@ public class StressTestService {
         return result;
     }
 
-    //  AFTER: buy تحت الضغط مع Pessimistic Lock
-    //   stock لا يصبح سالباً أبداً (Invariant )
+
     public Map<String, Object> stressTestBuyOptimized(int userCount, Long productId)
             throws InterruptedException {
 
-        log.info("🟢 [BUY-AFTER] {} مستخدم يشترون مع Pessimistic Lock", userCount);
+        log.info(" [BUY-AFTER] {} مستخدم يشترون مع Pessimistic Lock", userCount);
 
         AtomicInteger success = new AtomicInteger(0);
         AtomicInteger fail    = new AtomicInteger(0);
@@ -257,7 +254,7 @@ public class StressTestService {
         int finalStock = product.map(Product::getStockQuantity).orElse(-999);
 
         Map<String, Object> result = new LinkedHashMap<>();
-        result.put("mode",       "BUY Optimized — Pessimistic Lock ✅");
+        result.put("mode",       "BUY Optimized — Pessimistic Lock ");
         result.put("totalUsers", userCount);
         result.put("success",    success.get());
         result.put("fail",       fail.get());

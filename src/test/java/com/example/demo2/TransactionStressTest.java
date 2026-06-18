@@ -15,35 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * ═══════════════════════════════════════════════════════════
- * REQUIREMENT 8: Stress Test - Transaction Integrity / ACID
- * ═══════════════════════════════════════════════════════════
- *
- * ملف: src/test/java/com/example/demo2/TransactionStressTest.java
- *
- * يُثبت هذا الاختبار:
- *   1. بدون @Transactional → Partial Success يحدث (بيانات تالفة)
- *   2. مع @Transactional    → Atomicity مضمونة (لا Partial Success أبداً)
- *
- * كيف يعمل الاختبار؟
- * ────────────────────
- * يُشغّل N threads في نفس الوقت:
- *   - نصفها: simulateFailure=true  → يجب أن تُسبب ROLLBACK
- *   - نصفها: simulateFailure=false → يجب أن تنجح وتُحفظ
- *
- * التحقق (Assertions):
- *   - عدد الطلبات في DB = عدد الـ threads الناجحة فقط
- *   - رصيد المستخدم = الرصيد الأولي - (طلبات ناجحة × price)
- *
- * إذا نجحت الـ Assertions → ACID مُحقَّقة ✅
- * إذا فشلت → Partial Success حدث ❌
- *
- * ─── كيفية التشغيل ───────────────────────────────────────
- * من IntelliJ: click الأيقونة الخضراء بجانب اسم الكلاس
- * من Maven   : mvn test -Dtest=TransactionStressTest
- * كلا الاختبارين: mvn test -Dtest=TransactionStressTest#*
- */
+
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TransactionStressTest {
@@ -52,31 +24,27 @@ class TransactionStressTest {
     @Autowired private UserRepository     userRepository;
     @Autowired private SaleRepository     saleRepository;
 
-    // ── إعدادات الاختبار ──────────────────────────────────────
-    private static final int    THREADS       = 20;   // عدد الـ threads المتزامنة
-    private static final double PRICE         = 50.0; // سعر الطلب الواحد
-    private static final Long   TEST_USER_ID  = 999L; // رقم مستخدم خاص بالاختبار
-    private static final Long   PRODUCT_ID    = 1L;   // رقم المنتج
 
-    // ── قبل كل اختبار: تهيئة بيانات نظيفة ───────────────────
+    private static final int    THREADS       = 20;
+    private static final double PRICE         = 50.0;
+    private static final Long   TEST_USER_ID  = 999L;
+    private static final Long   PRODUCT_ID    = 1L;
+
+
     @BeforeEach
     void setUp() {
-        // إنشاء مستخدم اختبار برصيد كافٍ
-        // نستخدم ID خاص (999) حتى لا نتعارض مع بيانات المشروع
+
         userRepository.findById(TEST_USER_ID).ifPresent(userRepository::delete);
         User testUser = new User("stress_test_user",
-                                  BigDecimal.valueOf(THREADS * PRICE * 2)); // رصيد وافٍ
+                                  BigDecimal.valueOf(THREADS * PRICE * 2));
         testUser.setId(TEST_USER_ID);
 
-        // لا يمكن force-set الـ ID مع AUTO_INCREMENT في MySQL
-        // لذا نحفظه ونتذكر الـ ID الفعلي
-        // سنستخدم أي مستخدم موجود برقم 1 إذا لم يوجد userId=999
-        // أو نُنشئ واحداً ونحفظ ID الجديد
+
     }
 
-    // ── تهيئة المستخدم مرة واحدة ─────────────────────────────
+
     private Long setupTestUser() {
-        // ابحث عن أي مستخدم موجود أو أنشئ واحداً جديداً
+
         List<User> users = userRepository.findAll();
         if (!users.isEmpty()) {
             User user = users.get(0);
@@ -98,9 +66,7 @@ class TransactionStressTest {
     }
 
 
-    // ══════════════════════════════════════════════════════════
-    // ❌ اختبار 1: بدون Transaction → إثبات وجود المشكلة
-    // ══════════════════════════════════════════════════════════
+
 
     @Test
     @org.junit.jupiter.api.Order(1)
@@ -112,7 +78,7 @@ class TransactionStressTest {
 
         System.out.println("\n");
         System.out.println("╔══════════════════════════════════════════════════════╗");
-        System.out.println("║  ❌ اختبار BEFORE: بدون Transaction الموحدة         ║");
+        System.out.println("║   اختبار BEFORE: بدون Transaction الموحدة         ║");
         System.out.println("║  " + THREADS + " threads متزامنة، نصفها سيحقن فشلاً في المنتصف  ║");
         System.out.println("╚══════════════════════════════════════════════════════╝");
 
@@ -120,9 +86,9 @@ class TransactionStressTest {
             .map(u -> u.getWalletBalance().doubleValue()).orElse(0.0);
         System.out.println("   قبل الاختبار: رصيد=" + balanceBefore + "$, طلبات=" + initialOrderCount);
 
-        // إنشاء THREADS threads متزامنة
-        CountDownLatch startGun    = new CountDownLatch(1);    // إشارة البداية
-        CountDownLatch finishLine  = new CountDownLatch(THREADS); // انتظار كل الـ threads
+
+        CountDownLatch startGun    = new CountDownLatch(1);
+        CountDownLatch finishLine  = new CountDownLatch(THREADS);
         AtomicInteger  successCount  = new AtomicInteger(0);
         AtomicInteger  failureCount  = new AtomicInteger(0);
         List<String>   errors        = new CopyOnWriteArrayList<>();
@@ -135,7 +101,7 @@ class TransactionStressTest {
 
             pool.submit(() -> {
                 try {
-                    startGun.await(); // انتظر إشارة البداية الموحدة
+                    startGun.await();
                     transactionService.placeOrderWithoutTransaction(
                         finalUserId, PRODUCT_ID, 1, PRICE, shouldFail);
                     successCount.incrementAndGet();
@@ -148,11 +114,10 @@ class TransactionStressTest {
             });
         }
 
-        startGun.countDown(); // 🚦 أطلق الكل في نفس اللحظة!
+        startGun.countDown();
         finishLine.await(30, TimeUnit.SECONDS);
         pool.shutdown();
 
-        // ── النتائج ────────────────────────────────────────────
         double  balanceAfter  = userRepository.findById(userId)
             .map(u -> u.getWalletBalance().doubleValue()).orElse(0.0);
         long    ordersAfter   = saleRepository.count() - initialOrderCount;
@@ -167,28 +132,25 @@ class TransactionStressTest {
         System.out.println("   رصيد بعد الاختبار:    " + balanceAfter + "$");
         System.out.println("   مجموع ما خُصم:        " + deducted + "$");
 
-        // ── كشف المشكلة ────────────────────────────────────────
-        // إذا خُصم مبلغ أكثر مما يقابله طلبات → Partial Success حدث
+
         double expectedDeduction = successCount.get() * PRICE;
         boolean partialSuccessOccurred = (deducted > expectedDeduction) ||
                                           (ordersAfter < successCount.get());
 
         System.out.println("\n   ════ تحليل المشكلة ════");
         if (partialSuccessOccurred) {
-            System.out.println("   🔴 Partial Success اكتُشف:");
+            System.out.println("    Partial Success اكتُشف:");
             System.out.println("      المبلغ المخصوم: " + deducted + "$ ← أكثر مما يقابله طلبات");
-            System.out.println("      Atomicity مُنتهَكة ❌");
+            System.out.println("      Atomicity مُنتهَكة ");
         } else {
-            System.out.println("   ⚠️  لم يظهر Partial Success في هذه الجلسة");
+            System.out.println("  ️  لم يظهر Partial Success في هذه الجلسة");
             System.out.println("   (المشكلة غير حتمية - تُظهر مع ضغط أعلى)");
         }
         System.out.println("╚══════════════════════════════════════════════════════╝\n");
     }
 
 
-    // ══════════════════════════════════════════════════════════
-    // ✅ اختبار 2: مع Transaction → إثبات الحل
-    // ══════════════════════════════════════════════════════════
+
 
     @Test
     @org.junit.jupiter.api.Order(2)
@@ -200,7 +162,7 @@ class TransactionStressTest {
 
         System.out.println("\n");
         System.out.println("╔══════════════════════════════════════════════════════╗");
-        System.out.println("║  ✅ اختبار AFTER: مع @Transactional الموحدة         ║");
+        System.out.println("║   اختبار AFTER: مع @Transactional الموحدة         ║");
         System.out.println("║  " + THREADS + " threads متزامنة، نصفها سيحقن فشلاً → ROLLBACK  ║");
         System.out.println("╚══════════════════════════════════════════════════════╝");
 
@@ -226,7 +188,7 @@ class TransactionStressTest {
                         finalUserId, PRODUCT_ID, 1, PRICE, shouldFail);
                     successCount.incrementAndGet();
                 } catch (Exception e) {
-                    // Exception = ROLLBACK حدث = طبيعي ومتوقع
+
                     rollbackCount.incrementAndGet();
                 } finally {
                     finishLine.countDown();
@@ -238,7 +200,7 @@ class TransactionStressTest {
         finishLine.await(30, TimeUnit.SECONDS);
         pool.shutdown();
 
-        // ── النتائج ────────────────────────────────────────────
+
         double balanceAfter = userRepository.findById(userId)
             .map(u -> u.getWalletBalance().doubleValue()).orElse(0.0);
         long ordersAfter = saleRepository.count() - initialOrderCount;
@@ -253,23 +215,23 @@ class TransactionStressTest {
         System.out.println("   المبلغ المخصوم الفعلي:     " + actualDeduction + "$");
         System.out.println("   المبلغ المتوقع (ناجح×price): " + expectedDeduction + "$");
 
-        // ── التحقق (Assertions) ─────────────────────────────────
 
-        // ✅ عدد الطلبات في DB = عدد الـ threads الناجحة فقط
+
+
         assertEquals(successCount.get(), ordersAfter,
-            "❌ FAIL: عدد الطلبات (" + ordersAfter + ") لا يتطابق مع الناجحة ("
+            " FAIL: عدد الطلبات (" + ordersAfter + ") لا يتطابق مع الناجحة ("
             + successCount.get() + ") → Partial Success حدث!");
 
-        // ✅ الرصيد المخصوم = طلبات ناجحة × price فقط
+
         assertEquals(expectedDeduction, actualDeduction, 1.0, // 1$ هامش للتقريب
-            "❌ FAIL: المبلغ المخصوم (" + actualDeduction + "$) لا يتطابق مع المتوقع ("
+            " FAIL: المبلغ المخصوم (" + actualDeduction + "$) لا يتطابق مع المتوقع ("
             + expectedDeduction + "$) → ROLLBACK لم يعمل بشكل صحيح!");
 
         System.out.println("\n   ════ تحليل النتائج ════");
-        System.out.println("   ✅ عدد الطلبات = عدد الناجحين بالضبط");
-        System.out.println("   ✅ الرصيد المخصوم = ناجحة × " + PRICE + "$ بالضبط");
-        System.out.println("   ✅ ROLLBACK يعمل: " + rollbackCount.get() + " عملية رُدَّت بالكامل");
-        System.out.println("   ✅ Atomicity مُحقَّقة - لا Partial Success أبداً");
+        System.out.println("   عدد الطلبات = عدد الناجحين بالضبط");
+        System.out.println("  الرصيد المخصوم = ناجحة × " + PRICE + "$ بالضبط");
+        System.out.println("    ROLLBACK يعمل: " + rollbackCount.get() + " عملية رُدَّت بالكامل");
+        System.out.println("    Atomicity مُحقَّقة - لا Partial Success أبداً");
         System.out.println("╚══════════════════════════════════════════════════════╝\n");
     }
 }

@@ -27,8 +27,8 @@ public class StressTestController {
     ) throws InterruptedException {
 
         Map<String, Object> result = useFix
-                ? stressTestService.runWithCountDownLatch(users)      // AFTER
-                : stressTestService.runWithoutSynchronization(users); // BEFORE
+                ? stressTestService.runWithCountDownLatch(users)
+                : stressTestService.runWithoutSynchronization(users);
 
         return ResponseEntity.ok(result);
     }
@@ -41,8 +41,8 @@ public class StressTestController {
     ) throws InterruptedException {
 
         Map<String, Object> result = useFix
-                ? stressTestService.stressTestBuyOptimized(users, productId) //
-                : stressTestService.stressTestBuyLegacy(users, productId);   //
+                ? stressTestService.stressTestBuyOptimized(users, productId)
+                : stressTestService.stressTestBuyLegacy(users, productId);
 
         return ResponseEntity.ok(result);
     }
