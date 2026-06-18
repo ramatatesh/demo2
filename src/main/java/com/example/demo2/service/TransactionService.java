@@ -32,44 +32,42 @@ public class TransactionService {
     }
 
 
-    // ══════════════════════════════════════════════════════════
-    //  ❌ السيناريو الأول: بدون Transaction الموحدة (المشكلة)
+
 
     public TransactionResult placeOrderWithoutTransaction(
             Long userId, Long productId, int qty, double price, boolean simulateFailure) {
 
         log.warn("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        log.warn("⚠️  [NO-TRANSACTION] بدء العملية بدون Transaction موحدة");
+        log.warn("  [NO-TRANSACTION] بدء العملية بدون Transaction موحدة");
         log.warn("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 
-        // ── الخطوة 1: خصم المال ──
+
 
         paymentService.processPayment(userId, BigDecimal.valueOf(price));
-        log.warn("   [STEP 1/3] ✅ تم خصم المال - COMMITTED بشكل مستقل ← خطر!");
+        log.warn("   [STEP 1/3]  تم خصم المال - COMMITTED بشكل مستقل ← خطر!");
 
 
         if (simulateFailure) {
-            log.error("   [INJECT]   💥 خطأ مُصطنع بعد خصم المال مباشرةً!");
-            log.error("   [RESULT]   ❌ المال خُصم، لن يُنشأ أي طلب → Inconsistent State!");
+            log.error("   [INJECT]    خطأ مُصطنع بعد خصم المال مباشرةً!");
+            log.error("   [RESULT]    المال خُصم، لن يُنشأ أي طلب → Inconsistent State!");
             throw new RuntimeException("NO-TX SIMULATED FAILURE: Payment done, order lost!");
         }
 
-        // ── الخطوة 2: تخفيض المخزون ───
-        productService.decreaseStockInTransaction(productId, qty);
-        log.warn("   [STEP 2/3] ✅ تم تخفيض المخزون - COMMITTED بشكل مستقل ← خطر!");
 
-        // ── الخطوة 3: إنشاء سجل الطلب (Sale) ──
+        productService.decreaseStockInTransaction(productId, qty);
+        log.warn("   [STEP 2/3]  تم تخفيض المخزون - COMMITTED بشكل مستقل ← خطر!");
+
+
         Sale order = new Sale(productId, qty, price);
         saleRepository.save(order);
-        log.warn("   [STEP 3/3] ✅ تم إنشاء سجل الطلب (Sale#{})", order.getId());
+        log.warn("   [STEP 3/3]  تم إنشاء سجل الطلب (Sale#{})", order.getId());
 
         log.warn("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         return new TransactionResult(true, "تمت العملية (بدون حماية - خطر!)", null);
     }
 
 
-    // ══════════════════════════════════════════════════════════
-    //  ✅ السيناريو الثاني: مع @Transactional الموحدة (الحل)
+
 
 
     @Transactional(
@@ -81,41 +79,41 @@ public class TransactionService {
             Long userId, Long productId, int qty, double price, boolean simulateFailure) {
 
         log.info("═══════════════════════════════════════════════");
-        log.info("🔐 [WITH-TRANSACTION] بدأت Transaction موحدة");
+        log.info(" [WITH-TRANSACTION] بدأت Transaction موحدة");
         log.info("   Isolation: REPEATABLE_READ | Propagation: REQUIRED");
         log.info("═══════════════════════════════════════════════");
 
 
         paymentService.processPayment(userId, BigDecimal.valueOf(price));
-        log.info("   [STEP 1/3] ✅ خُصم المال في TX Buffer (لم يُحفظ بعد)");
+        log.info("   [STEP 1/3] خُصم المال في TX Buffer (لم يُحفظ بعد)");
 
-        // ── حقن الفشل (للتوضيح) ───
+
         if (simulateFailure) {
-            log.error("   [INJECT]   💥 خطأ مُصطنع داخل الـ Transaction!");
-            log.error("   [ROLLBACK] 🔄 Spring سيُطلق ROLLBACK → المال يعود!");
+            log.error("   [INJECT]    خطأ مُصطنع داخل الـ Transaction!");
+            log.error("   [ROLLBACK]  Spring سيُطلق ROLLBACK → المال يعود!");
             throw new RuntimeException("WITH-TX SIMULATED FAILURE: Full ROLLBACK triggered!");
         }
 
-        // ── الخطوة 2: تخفيض المخزون ─────────────────────────
+
 
         productService.decreaseStockInTransaction(productId, qty);
-        log.info("   [STEP 2/3] ✅ خُفِّض المخزون في TX Buffer");
+        log.info("   [STEP 2/3]  خُفِّض المخزون في TX Buffer");
 
 
         Sale order = new Sale(productId, qty, price);
         saleRepository.save(order);
-        log.info("   [STEP 3/3] ✅ أُنشئ سجل الطلب في TX Buffer");
+        log.info("   [STEP 3/3]  أُنشئ سجل الطلب في TX Buffer");
 
         log.info("═══════════════════════════════════════════════");
-        log.info("🎉 [COMMIT] كل الخطوات نجحت - سيُحفظ كل شيء الآن");
+        log.info(" [COMMIT] كل الخطوات نجحت - سيُحفظ كل شيء الآن");
         log.info("═══════════════════════════════════════════════");
 
         return new TransactionResult(true,
-                "تمت العملية بنجاح كامل مع ACID ✅ (orderId=" + order.getId() + ")",
+                "تمت العملية بنجاح كامل مع ACID  (orderId=" + order.getId() + ")",
                 order.getId());
     }
 
-    //  Response Record
+
     public record TransactionResult(
             boolean success,
             String message,

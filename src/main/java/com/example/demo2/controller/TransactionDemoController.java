@@ -33,7 +33,7 @@ public class TransactionDemoController {
     }
 
 
-    // ─── POST /transaction/place ──────
+
 
     @PostMapping("/place")
     public ResponseEntity<Map<String, Object>> placeOrder(
@@ -44,12 +44,12 @@ public class TransactionDemoController {
             @RequestParam(defaultValue = "true") boolean useFix,
             @RequestParam(defaultValue = "false") boolean simulateFailure) {
 
-        log.info("📨 [Controller] طلب شراء | useFix={} | simulateFailure={}", useFix, simulateFailure);
+        log.info(" [Controller] طلب شراء | useFix={} | simulateFailure={}", useFix, simulateFailure);
 
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("useFix",          useFix);
         response.put("simulateFailure", simulateFailure);
-        response.put("mode",            useFix ? "✅ WITH Transaction (ACID)" : "❌ WITHOUT Transaction");
+        response.put("mode",            useFix ? " WITH Transaction (ACID)" : " WITHOUT Transaction");
 
         try {
             TransactionService.TransactionResult result;
@@ -74,19 +74,19 @@ public class TransactionDemoController {
 
             if (useFix) {
                 response.put("dbStatus",
-                    "🟢 SAFE: ROLLBACK تم تلقائياً - قاعدة البيانات في حالة متسقة");
+                    " SAFE: ROLLBACK تم تلقائياً - قاعدة البيانات في حالة متسقة");
             } else {
                 response.put("dbStatus",
-                    "🔴 DANGER: لا يوجد ROLLBACK - قد تكون البيانات في حالة غير متسقة!");
+                    " DANGER: لا يوجد ROLLBACK - قد تكون البيانات في حالة غير متسقة!");
             }
 
-            // HTTP 500 لكلا الحالتين لإظهار الفشل
+
             return ResponseEntity.internalServerError().body(response);
         }
     }
 
 
-    // ─── GET /transaction/state ───────────
+
 
     @GetMapping("/state")
     public ResponseEntity<Map<String, Object>> getDatabaseState(
@@ -110,7 +110,7 @@ public class TransactionDemoController {
     }
 
 
-    // ─── POST /transaction/reset ─────
+
 
     @PostMapping("/reset")
     public ResponseEntity<Map<String, Object>> resetData(
@@ -120,7 +120,7 @@ public class TransactionDemoController {
         userRepository.findById(userId).ifPresent(user -> {
             user.setWalletBalance(resetBalance);
             userRepository.save(user);
-            log.info("🔄 [Reset] رصيد userId={} أُعيد إلى {}", userId, resetBalance);
+            log.info(" [Reset] رصيد userId={} أُعيد إلى {}", userId, resetBalance);
         });
 
         saleRepository.deleteAll(saleRepository.findByProcessedFalse());
