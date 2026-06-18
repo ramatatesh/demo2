@@ -3,16 +3,7 @@ package com.example.demo2.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
-/**
- * ─────────────────────────────────────────────────
- * REQUIREMENT 8: Transaction Integrity / ACID
- * ─────────────────────────────────────────────────
- * نموذج المستخدم الذي يحتوي على المحفظة (wallet).
- * يتبع نفس أسلوب كتابة Product.java الموجود في المشروع:
- *   - لا Lombok
- *   - Constructor فارغ + Constructor بالحقول
- *   - Getters و Setters يدوية
- */
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -24,15 +15,10 @@ public class User {
     @Column(nullable = false)
     private String username;
 
-    /**
-     * رصيد المحفظة.
-     * BigDecimal لأن الحسابات المالية تتطلب دقة عالية.
-     * double يُفقد الدقة في العمليات المتكررة.
-     */
     @Column(name = "wallet_balance", nullable = false)
     private BigDecimal walletBalance;
 
-    // ── Constructors ──────────────────────────────
+    // ── Constructors ───────
     public User() {}
 
     public User(String username, BigDecimal walletBalance) {
@@ -40,7 +26,7 @@ public class User {
         this.walletBalance = walletBalance;
     }
 
-    // ── Getters & Setters ─────────────────────────
+    // ── Getters & Setters ────────
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

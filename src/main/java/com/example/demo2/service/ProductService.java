@@ -124,9 +124,6 @@ public class ProductService {
         }
     }
 
-    /**
-     * دالة مساعدة داخلية لتنفيذ منطق الخصم الفعلي من المستودع وتحديث الكاش
-     */
     private boolean executePurchaseLogic(Long productId, int quantity) {
         Optional<Product> productOpt = productRepository.findById(productId);
         if (productOpt.isEmpty()) {
@@ -152,32 +149,9 @@ public class ProductService {
         return true;
     }
 
-    /**
-     * decreaseStockInTransaction:
-     * ────────────────────────────
-     * هذه هي دالة "decreaseStock()" المُشار إليها في متطلب 8.
-     * صُمِّمت خصيصاً لتُستدعى من داخل transaction خارجية في TransactionService.
-     *
-     * الفرق بينها وبين buyProduct():
-     *   buyProduct()               → مع/بدون Redisson Lock (للمتطلب 7)
-     *   decreaseStockInTransaction() → داخل DB Transaction فقط (للمتطلب 8)
-     *
-     * @Transactional(propagation = Propagation.REQUIRED):
-     *   - إذا استُدعيت من داخل TransactionService.placeOrderWithTransaction()
-     *     (التي هي @Transactional) → تنضم للـ transaction الخارجية.
-     *   - إذا استُدعيت من خارج أي transaction → تُنشئ transaction خديمة خاصة بها.
-     *
-     * findByIdForUpdate(): موجودة بالفعل في ProductRepository مع PESSIMISTIC_WRITE.
-     * هذا يقفل الصف أثناء الـ transaction لمنع التعارض مع threads أخرى.
-     *
-     * @param productId رقم المنتج
-     * @param quantity الكمية المراد خصمها
-     * @throws RuntimeException إذا كان المخزون غير كافٍ → يُشغّل ROLLBACK في الـ transaction الخارجية
-     */
+
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void decreaseStockInTransaction(Long productId, int quantity) {
-        // findByIdForUpdate يستخدم SELECT ... FOR UPDATE لقفل الصف
-        // هذا موجود بالفعل في ProductRepository
         var productOpt = productRepository.findByIdForUpdate(productId);
 
         if (productOpt.isEmpty()) {

@@ -14,47 +14,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * ═══════════════════════════════════════════════════════════
- * REQUIREMENT 8: Transaction Integrity / ACID
- * ═══════════════════════════════════════════════════════════
- *
- * نقطة الدخول (Endpoints) للمتطلب الثامن.
- *
- * المسار الأساسي: /transaction
- *
- * ─── الـ Endpoints المتاحة ────────────────────────────────
- *
- * POST /transaction/place
- *   → نقطة الدخول الرئيسية مع Toggle بين Before/After
- *   Parameters:
- *     - userId          : رقم المستخدم
- *     - productId       : رقم المنتج
- *     - qty             : الكمية
- *     - price           : السعر
- *     - useFix          : true = مع Transaction | false = بدون Transaction
- *     - simulateFailure : true = حقن فشل في المنتصف
- *
- * GET /transaction/state
- *   → عرض الحالة الحالية لقاعدة البيانات (للمقارنة قبل/بعد)
- *
- * POST /transaction/reset
- *   → إعادة البيانات لحالتها الأصلية (لإعادة الاختبار)
- *
- * ─── سيناريو العرض الحي ───────────────────────────────────
- *
- * 1. GET  /transaction/state               → الحالة الأولية
- * 2. POST /transaction/place?useFix=false&simulateFailure=true
- *                                          → عرض المشكلة
- * 3. GET  /transaction/state               → رصيد نقص بدون طلب!
- * 4. POST /transaction/reset               → إعادة البيانات
- * 5. POST /transaction/place?useFix=true&simulateFailure=true
- *                                          → عرض الحل (ROLLBACK)
- * 6. GET  /transaction/state               → لا شيء تغير ✅
- * 7. POST /transaction/place?useFix=true&simulateFailure=false
- *                                          → طلب ناجح
- * 8. GET  /transaction/state               → كل شيء متسق ✅
- */
 @RestController
 @RequestMapping("/transaction")
 public class TransactionDemoController {
@@ -74,17 +33,8 @@ public class TransactionDemoController {
     }
 
 
-    // ─── POST /transaction/place ──────────────────────────────────────────────
+    // ─── POST /transaction/place ──────
 
-    /**
-     * نقطة الدخول الرئيسية مع Toggle Scenario.
-     *
-     * useFix=false → placeOrderWithoutTransaction → يُظهر المشكلة
-     * useFix=true  → placeOrderWithTransaction    → يُظهر الحل
-     *
-     * defaultValue="true"  → الافتراضي هو الحل الآمن
-     * defaultValue="false" → لا يُحقن فشل بالافتراضي (طلب ناجح)
-     */
     @PostMapping("/place")
     public ResponseEntity<Map<String, Object>> placeOrder(
             @RequestParam(defaultValue = "1")    Long    userId,
@@ -136,19 +86,14 @@ public class TransactionDemoController {
     }
 
 
-    // ─── GET /transaction/state ───────────────────────────────────────────────
+    // ─── GET /transaction/state ───────────
 
-    /**
-     * عرض الحالة الحالية لقاعدة البيانات.
-     * استخدمه قبل وبعد كل اختبار للمقارنة المباشرة.
-     */
     @GetMapping("/state")
     public ResponseEntity<Map<String, Object>> getDatabaseState(
             @RequestParam(defaultValue = "1") Long userId) {
 
         Map<String, Object> state = new LinkedHashMap<>();
 
-        // رصيد المستخدم
         Optional<User> userOpt = userRepository.findById(userId);
         if (userOpt.isPresent()) {
             state.put("user_id",      userId);
@@ -157,7 +102,6 @@ public class TransactionDemoController {
             state.put("user_error", "User not found: id=" + userId);
         }
 
-        // عدد الطلبات (Sales) في DB
         long totalOrders = saleRepository.count();
         state.put("total_orders_in_db", totalOrders);
         state.put("note", "قارن هذه القيم قبل وبعد كل اختبار");
@@ -166,28 +110,19 @@ public class TransactionDemoController {
     }
 
 
-    // ─── POST /transaction/reset ──────────────────────────────────────────────
+    // ─── POST /transaction/reset ─────
 
-    /**
-     * إعادة البيانات لحالتها الأصلية.
-     * استخدمه بين اختبارات Before/After.
-     *
-     * ⚠️ يحذف كل السجلات من جدول sales (الطلبات).
-     *    إذا كانت لديك بيانات مهمة في sales، أضِف شرطاً للتصفية.
-     */
     @PostMapping("/reset")
     public ResponseEntity<Map<String, Object>> resetData(
             @RequestParam(defaultValue = "1")       Long       userId,
             @RequestParam(defaultValue = "1000.00") BigDecimal resetBalance) {
 
-        // إعادة رصيد المستخدم
         userRepository.findById(userId).ifPresent(user -> {
             user.setWalletBalance(resetBalance);
             userRepository.save(user);
             log.info("🔄 [Reset] رصيد userId={} أُعيد إلى {}", userId, resetBalance);
         });
 
-        // حذف سجلات الطلبات (Sales) غير المعالجة
         saleRepository.deleteAll(saleRepository.findByProcessedFalse());
 
         Map<String, Object> result = new LinkedHashMap<>();
