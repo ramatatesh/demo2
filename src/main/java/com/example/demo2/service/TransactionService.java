@@ -47,7 +47,7 @@ public class TransactionService {
         paymentService.processPayment(userId, BigDecimal.valueOf(price));
         log.warn("   [STEP 1/3] ✅ تم خصم المال - COMMITTED بشكل مستقل ← خطر!");
 
-        // ── حقن الفشل (للتوضيح) ───
+
         if (simulateFailure) {
             log.error("   [INJECT]   💥 خطأ مُصطنع بعد خصم المال مباشرةً!");
             log.error("   [RESULT]   ❌ المال خُصم، لن يُنشأ أي طلب → Inconsistent State!");
@@ -84,6 +84,7 @@ public class TransactionService {
         log.info("🔐 [WITH-TRANSACTION] بدأت Transaction موحدة");
         log.info("   Isolation: REPEATABLE_READ | Propagation: REQUIRED");
         log.info("═══════════════════════════════════════════════");
+
 
         paymentService.processPayment(userId, BigDecimal.valueOf(price));
         log.info("   [STEP 1/3] ✅ خُصم المال في TX Buffer (لم يُحفظ بعد)");
